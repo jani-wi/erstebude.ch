@@ -3,6 +3,15 @@
    Farben und Schriften gemäss Styleguide v1.0. Änderungen an Farben nur hier
    in :root vornehmen.
    ========================================================================== */
+/* Schriften lokal (Ordner fonts/), keine Verbindung zu Google Fonts ----------- */
+@font-face{font-family:"Outfit";font-style:normal;font-weight:400 500;font-display:swap;src:url(fonts/Outfit-Regular.ttf) format("truetype")}
+@font-face{font-family:"Outfit";font-style:normal;font-weight:600 900;font-display:swap;src:url(fonts/Outfit-Bold.ttf) format("truetype")}
+/* Source Sans 3: Dateien von fonts.google.com/specimen/Source+Sans+3 in fonts/ legen (siehe README).
+   Fehlen sie, wird automatisch eine Systemschrift verwendet. */
+@font-face{font-family:"Source Sans 3";font-style:normal;font-weight:400;font-display:swap;src:local("Source Sans 3"),url(fonts/SourceSans3-Regular.ttf) format("truetype")}
+@font-face{font-family:"Source Sans 3";font-style:normal;font-weight:600;font-display:swap;src:local("Source Sans 3 SemiBold"),url(fonts/SourceSans3-SemiBold.ttf) format("truetype")}
+@font-face{font-family:"Source Sans 3";font-style:normal;font-weight:700;font-display:swap;src:local("Source Sans 3 Bold"),url(fonts/SourceSans3-Bold.ttf) format("truetype")}
+
 :root{
   --nacht:#1F3F66;      /* Logo, Flächen, Überschriften */
   --himmel:#EAF0F6;     /* Hintergründe, Kästen, Tags */
@@ -93,15 +102,22 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .steps::before{content:"";position:absolute;top:48px;left:8%;right:8%;border-top:2px dashed var(--linie)}
 @media (max-width:980px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}.steps::before{display:none}}
 @media (max-width:520px){.steps{grid-template-columns:minmax(0,1fr)}}
-.step{position:relative;background:var(--weiss);border:1px solid var(--linie);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:12px;text-decoration:none;transition:border-color .15s,transform .15s}
-.step:hover{border-color:var(--nacht);transform:translateY(-3px)}
+.step{position:relative;background:var(--weiss);border:1px solid var(--linie);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:12px;transition:border-color .15s,transform .15s}
+.step:hover,.step:focus-within{border-color:var(--nacht)}
+.step[data-current]{border-color:var(--nacht);box-shadow:inset 0 0 0 1px var(--nacht)}
 .step .top{display:flex;align-items:center;justify-content:space-between}
 .num{width:52px;height:52px;border-radius:50%;background:var(--nacht);color:var(--weiss);display:grid;place-items:center;font-family:var(--fh);font-weight:800;font-size:22px}
 .step .ic{width:40px;height:40px;color:var(--nacht)}
 .step h3{font-size:24px}
-.step ul{margin:0;padding:12px 0 0;list-style:none;display:flex;flex-direction:column;gap:6px;font-size:15.5px;color:var(--grau);border-top:1px solid var(--linie)}
-.step ul li::before{content:"→ ";color:var(--apricot);font-weight:700}
-.step .more{margin-top:auto;font-weight:700;color:var(--nacht);font-size:15.5px}
+.step-link{text-decoration:none;color:inherit}
+.step-link::after{content:"";position:absolute;inset:0;border-radius:16px}
+.step-link:hover{text-decoration:underline;text-decoration-color:var(--apricot);text-underline-offset:4px}
+.step ul{margin:0;padding:12px 0 0;list-style:none;display:flex;flex-direction:column;gap:2px;font-size:15.5px;border-top:1px solid var(--linie)}
+.step ul li{display:flex;gap:6px}
+.step ul li::before{content:"→";color:var(--apricot);font-weight:700}
+.step ul a{position:relative;z-index:1;color:var(--nacht);font-weight:600;text-decoration:none;padding:3px 0}
+.step ul a:hover{text-decoration:underline;text-decoration-color:var(--apricot);text-underline-offset:3px}
+.step .more{margin-top:auto;font-weight:700;color:var(--grau);font-size:15px}
 
 /* Feature-Artikel ---------------------------------------------------------- */
 .feature{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);background:var(--himmel);border-radius:20px;overflow:hidden;text-decoration:none}
@@ -205,6 +221,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .next small{display:block;color:#D3DEEA;font-size:14px;text-transform:uppercase;letter-spacing:.07em;font-weight:700}
 .next strong{font-family:var(--fh);font-size:22px;line-height:1.2}
 .next .arrow{margin-left:auto;font-size:28px;color:var(--apricot)}
+.prose .next{color:var(--weiss);text-decoration:none}
+.prose .btn{text-decoration:none}
 .next:hover strong{text-decoration:underline;text-decoration-color:var(--apricot)}
 .faq details{border-bottom:1px solid var(--linie);padding:14px 0}
 .faq summary{font-family:var(--fh);font-weight:700;color:var(--nacht);font-size:19px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px}
@@ -234,12 +252,70 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .site-footer button.linklike:hover{color:var(--weiss);text-decoration:underline}
 .legal{grid-column:1/-1;border-top:1px solid rgba(255,255,255,.15);padding-top:20px;font-size:14px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
 
+
+
+/* Kästen «Dein nächster Schritt» -------------------------------------------- */
+.hubbox{background:var(--himmel);border-radius:20px;padding:30px;display:flex;flex-direction:column;gap:12px;margin:8px 0}
+.hubbox h2{margin-top:4px!important}
+.hubbox .btns,.btns{display:flex;flex-wrap:wrap;gap:12px}
+.hubgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 24px;margin-top:6px}
+@media (max-width:620px){.hubgrid{grid-template-columns:minmax(0,1fr)}}
+.hubgrid b{font-family:var(--fh);color:var(--nacht);font-size:17px}
+.hubgrid ul{list-style:none;padding:0!important;margin:6px 0 0!important;gap:6px!important}
+.hubgrid li{font-size:16px;line-height:1.35;display:flex;gap:6px}
+.hubgrid li::before{content:"→";color:var(--apricot);font-weight:700}
+.steps-list{padding-left:22px!important}
+.btn-block{width:100%}
+
+/* Zügelplaner */
+.planer label{font-weight:700;color:var(--nacht);display:block;margin-bottom:6px}
+.planer-row{display:flex;flex-wrap:wrap;gap:10px}
+.planer input{font:inherit;font-size:17px;padding:10px 14px;border:2px solid var(--linie);border-radius:12px;background:var(--weiss);color:var(--tinte);min-height:48px}
+.plan{list-style:none;padding:0!important;margin:4px 0 0;gap:0!important;background:var(--weiss);border-radius:14px;overflow:hidden}
+.plan li{display:grid;grid-template-columns:200px minmax(0,1fr);gap:12px;padding:12px 16px;border-bottom:1px solid var(--linie);font-size:16.5px}
+.plan li:last-child{border-bottom:0}
+.plan li.day{background:var(--apricot-hell)}
+.plan .when{display:flex;flex-direction:column;font-size:14px;color:var(--grau);line-height:1.3}
+.plan .when b{color:var(--nacht);font-size:16px}
+@media (max-width:560px){.plan li{grid-template-columns:minmax(0,1fr);gap:4px}}
+
+/* Vorlagen-Seite */
+.vgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+@media (max-width:760px){.vgrid{grid-template-columns:minmax(0,1fr)}}
+.vcard{border:1px solid var(--linie);border-radius:16px;padding:26px;display:flex;flex-direction:column;gap:12px}
+.vcard .ic{width:48px;height:48px;border-radius:12px;background:var(--himmel);display:grid;place-items:center;color:var(--nacht)}
+.vcard h2{font-size:24px}
+.vcard p{color:var(--grau);font-size:16.5px}
+.vcard .btns{margin-top:auto}
+
 /* Cookie-Banner ------------------------------------------------------------ */
-.cookie{position:fixed;left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));max-width:560px;margin-left:auto;background:var(--weiss);border:1px solid var(--linie);border-radius:16px;box-shadow:0 14px 40px rgba(22,36,58,.18);padding:18px 20px;display:flex;flex-direction:column;gap:12px;z-index:40;font-size:15.5px}
-.cookie b{font-family:var(--fh);color:var(--nacht);font-size:17px}
+.cookie{position:fixed;left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));max-width:600px;margin:0 auto;background:var(--weiss);border:1px solid var(--linie);border-radius:18px;box-shadow:0 18px 50px rgba(22,36,58,.25);padding:22px 24px;display:flex;flex-direction:column;gap:14px;z-index:60;font-size:15.5px;line-height:1.5;max-height:calc(100vh - 32px);overflow:auto;animation:cookie-in .35s ease-out}
+@keyframes cookie-in{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.cookie b{font-family:var(--fh);color:var(--nacht);font-size:19px}
+.cookie-main{display:flex;flex-direction:column;gap:8px}
 .cookie .row{display:flex;flex-wrap:wrap;gap:10px}
-.cookie .btn{padding:9px 16px;font-size:15px}
-.cookie a{color:var(--nacht)}
+.cookie .btn{padding:10px 18px;font-size:15.5px;flex:1 1 auto}
+.cookie a{color:var(--nacht);font-weight:600}
+.cookie-prefs{display:flex;flex-direction:column;gap:8px}
+.pref{display:flex;gap:12px;align-items:flex-start;background:var(--himmel);border-radius:12px;padding:12px 14px;cursor:pointer}
+.pref input{width:20px;height:20px;accent-color:var(--nacht);flex:none;margin-top:3px}
+.pref b{font-size:16px!important;display:block}
+.pref small{display:block;color:var(--grau);font-size:14.5px}
+button.linklike{background:none;border:0;padding:0;color:inherit;font:inherit;cursor:pointer;text-align:left}
+button.linklike.inline{color:var(--nacht);font-weight:600;text-decoration:underline;text-decoration-color:var(--apricot);text-underline-offset:3px}
+.legal-text code{font-size:14px;background:var(--himmel);padding:1px 5px;border-radius:4px}
+.legal-text td,.legal-text th{font-size:15px;vertical-align:top}
+
+/* Drucken (z.B. Checkliste) -------------------------------------------------- */
+@media print{
+  .site-header,.site-footer,.cookie,.cl-side,.skip,.page-head .eyebrow{display:none!important}
+  .page-head{background:none}.page-head .wrap{padding:0 0 12px}
+  .block{padding:0}
+  .cl-page{display:block}
+  .check{background:none;border:1px solid #ccc;break-inside:avoid}
+  .check small{display:none}
+  body{font-size:13pt}
+}
 
 /* Rechtstexte -------------------------------------------------------------- */
 .legal-text h2{font-size:24px}

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Datenschutzerklärung | ErsteBude.ch</title>
-<meta name="description" content="Datenschutzerklärung von ErsteBude.ch: welche Daten wir erheben, welche Tools wir mit deiner Zustimmung einsetzen und welche Rechte du hast.">
+<meta name="description" content="Datenschutzerklärung von ErsteBude.ch: welche Daten wir bearbeiten, Cookies, Google Analytics, Google Ads und deine Rechte.">
 <!-- Vor dem Livegang auf allen Seiten ändern zu: index, follow -->
 <meta name="robots" content="noindex, nofollow">
 <link rel="canonical" href="https://erstebude.ch/datenschutz.html">
@@ -12,21 +12,19 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="de_CH">
 <meta property="og:site_name" content="ErsteBude.ch">
-<meta property="og:title" content="Datenschutz">
-<meta property="og:description" content="Datenschutzerklärung von ErsteBude.ch: welche Daten wir erheben, welche Tools wir mit deiner Zustimmung einsetzen und welche Rechte du hast.">
+<meta property="og:title" content="Datenschutzerklärung | ErsteBude.ch">
+<meta property="og:description" content="Datenschutzerklärung von ErsteBude.ch: welche Daten wir bearbeiten, Cookies, Google Analytics, Google Ads und deine Rechte.">
 <meta property="og:url" content="https://erstebude.ch/datenschutz.html">
 <meta property="og:image" content="https://erstebude.ch/img/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<!-- Search Console / Bing: Codes hier einfügen (nur in index.html nötig), z.B.
-<meta name="google-site-verification" content="CODE">
-<meta name="msvalidate.01" content="CODE"> -->
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" href="img/logo/erstebude_favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="img/logo/favicon-180.png">
 <link rel="manifest" href="site.webmanifest">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap">
+<!-- Schriften liegen im Ordner fonts/ (keine Verbindung zu Google Fonts) -->
+<link rel="preload" href="fonts/Outfit-Bold.ttf" as="font" type="font/ttf" crossorigin>
 <link rel="stylesheet" href="style.css">
 <script type="application/ld+json">
 {
@@ -34,21 +32,22 @@
   "@graph": [
     {
       "@type": "Organization",
-      "@id": "https://erstebude.ch/index.html#org",
+      "@id": "https://erstebude.ch/#org",
       "name": "ErsteBude.ch",
       "url": "https://erstebude.ch/",
+      "slogan": "Der Wegweiser für deinen ersten Auszug",
       "logo": "https://erstebude.ch/img/logo/favicon-512.png"
     },
     {
       "@type": "WebSite",
-      "@id": "https://erstebude.ch/index.html#website",
+      "@id": "https://erstebude.ch/#website",
       "name": "ErsteBude.ch",
       "url": "https://erstebude.ch/",
       "inLanguage": "de-CH",
       "publisher": {
-        "@id": "https://erstebude.ch/index.html#org"
+        "@id": "https://erstebude.ch/#org"
       },
-      "description": "Wegweiser zur ersten eigenen Wohnung in der Schweiz."
+      "description": "Der Wegweiser für deinen ersten Auszug in der Schweiz: Wohnung oder WG suchen, bewerben, Kosten planen und zügeln."
     }
   ]
 }
@@ -61,35 +60,69 @@
 
 <!-- ================= INHALT ================= -->
 <main id="inhalt">
-<section class="page-head">
-  <div class="wrap">
-    <h1>Datenschutzerklärung</h1>
-    <p>Stand: 18. Oktober 2026. Vorlage, vor dem Livegang vom Team prüfen.</p>
-  </div>
-</section>
-<section class="block">
-  <div class="prose legal-text">
-    <h2>1. Verantwortliche Stelle</h2>
-    <p><span class="ph">[Vorname Name]</span>, <span class="ph">[Strasse Nr., PLZ Ort]</span>, <span class="ph">[E-Mail-Adresse]</span></p>
-    <p>Wir bearbeiten Personendaten nach dem Schweizer Datenschutzgesetz (DSG) und, soweit anwendbar, nach der EU-Datenschutz-Grundverordnung (DSGVO).</p>
-    <h2>2. Hosting</h2>
-    <p>Die Website wird über GitHub Pages (GitHub, Inc., USA) bereitgestellt. Beim Aufruf verarbeitet GitHub technische Daten wie die IP-Adresse, um die Seite auszuliefern und die Sicherheit zu gewährleisten. Weitere Informationen: Datenschutzerklärung von GitHub.</p>
-    <h2>3. Schriften</h2>
-    <p class="todo">Falls die Schriften über Google Fonts geladen werden (Einstellung "fonts": "google"), wird dabei die IP-Adresse an Google übertragen. Empfehlung: Schriften lokal einbinden (siehe README) und diesen Abschnitt dann anpassen.</p>
-    <h2>4. Cookies und Einwilligung</h2>
-    <p>Notwendige Speicherungen (deine Cookie-Wahl, dein Checklisten-Fortschritt) liegen nur im lokalen Speicher deines Browsers und werden nicht an uns übertragen. Analyse- und Werbe-Tools laden wir erst, wenn du im Cookie-Banner zustimmst. Du kannst deine Wahl jederzeit über «Cookie-Einstellungen» im Footer ändern.</p>
-    <h2>5. Google Analytics 4</h2>
-    <p>Mit deiner Zustimmung nutzen wir Google Analytics 4 (Google Ireland Ltd. / Google LLC), um zu verstehen, welche Inhalte hilfreich sind (z.B. Seitenaufrufe, Verweildauer, Herkunft über Kampagnenlinks). Dabei können Daten in die USA übermittelt werden.</p>
-    <h2>6. Google Ads</h2>
-    <p>Mit deiner Zustimmung messen wir mit dem Google-Ads-Conversion-Tracking, ob nach einem Klick auf eine Anzeige die Dossier-Vorlage heruntergeladen wurde.</p>
-    <h2>7. Meta Pixel</h2>
-    <p>Mit deiner Zustimmung nutzen wir das Meta Pixel (Meta Platforms Ireland Ltd.), um die Wirkung unserer Anzeigen auf Instagram und Facebook zu messen.</p>
-    <h2>8. E-Mail-Kontakt</h2>
-    <p>Wenn du uns per E-Mail schreibst, verwenden wir deine Angaben nur, um deine Anfrage zu beantworten.</p>
-    <h2>9. Deine Rechte</h2>
-    <p>Du kannst Auskunft über deine Daten verlangen sowie deren Berichtigung oder Löschung. Schreib uns dazu an die oben genannte E-Mail-Adresse.</p>
-  </div>
-</section>
+<section class="page-head"><div class="wrap">
+  <h1>Datenschutzerklärung</h1>
+  <p>Stand: 19. Oktober 2026. Hier erklären wir, welche Personendaten wir bearbeiten, wozu und welche Rechte du hast.</p>
+</div></section>
+<section class="block"><div class="prose legal-text">
+<div class="answer"><b>Kurz gesagt</b><p>Ohne deine Zustimmung messen wir nichts. Notwendige Angaben (deine Cookie-Wahl, dein Checklisten-Fortschritt) bleiben in deinem Browser. Nur wenn du zustimmst, nutzen wir Google Analytics und das Conversion-Tracking von Google Ads. Deine Wahl kannst du jederzeit unter <button class="linklike inline" type="button" data-consent-open>Cookie-Einstellungen</button> ändern.</p></div>
+
+<h2 id="verantwortlich">1. Wer ist verantwortlich?</h2>
+<p>Projektteam ErsteBude.ch: Emina Heinz, Erina Misini, Romina Murkovic und Janira Wicki<br>c/o <span class="ph">[Vorname Name]</span>, <span class="ph">[Strasse Nr., PLZ Ort]</span>, Schweiz<br>E-Mail: <span class="ph">[E-Mail-Adresse]</span></p>
+<p>Wir bearbeiten Personendaten nach dem Schweizer Datenschutzgesetz (DSG). Soweit die EU-Datenschutz-Grundverordnung (DSGVO) anwendbar ist, zum Beispiel bei Besuchen aus der EU, halten wir auch sie ein.</p>
+
+<h2 id="ueberblick">2. Welche Daten bearbeiten wir und wozu?</h2>
+<div class="tbl"><table><thead><tr><th>Was</th><th>Wozu</th><th>Grundlage</th></tr></thead><tbody>
+<tr><td>Technische Zugriffsdaten (IP-Adresse, Zeitpunkt, Browser)</td><td>Website ausliefern und schützen</td><td>Berechtigtes Interesse</td></tr>
+<tr><td>Cookie-Wahl und Checklisten-Fortschritt im Browser</td><td>Deine Einstellungen merken</td><td>Notwendig für die Funktion, die du nutzt</td></tr>
+<tr><td>Nutzungsdaten mit Google Analytics</td><td>Verstehen, welche Inhalte helfen</td><td>Deine Einwilligung</td></tr>
+<tr><td>Anzeigenklick und Download mit Google Ads</td><td>Messen, ob unsere Anzeigen funktionieren</td><td>Deine Einwilligung</td></tr>
+<tr><td>Deine E-Mail an uns</td><td>Deine Anfrage beantworten</td><td>Deine Anfrage / berechtigtes Interesse</td></tr>
+</tbody></table></div>
+<p>Wir verkaufen keine Daten, erstellen keine Profile für Werbung und nutzen kein Remarketing. Ein Konto oder Formular, in das du Daten eingibst, gibt es auf ErsteBude.ch nicht.</p>
+
+<h2 id="hosting">3. Hosting und Domain</h2>
+<p>Die Website wird über GitHub Pages bereitgestellt (GitHub, Inc., USA). Beim Aufruf jeder Seite verarbeitet GitHub technische Daten wie deine IP-Adresse, um die Seite auszuliefern und Angriffe abzuwehren. GitHub speichert diese Daten nach eigenen Angaben nur kurz. Domain und E-Mail laufen über die hosttech GmbH in der Schweiz.</p>
+
+<h2 id="schriften">4. Schriften</h2>
+<p>Die Schriften sind direkt auf unserem Server gespeichert. Beim Laden der Seite wird keine Verbindung zu Google Fonts oder anderen Schriftanbietern aufgebaut.</p>
+
+<h2 id="cookies">5. Cookies und lokaler Speicher</h2>
+<p>Notwendige Angaben speichern wir im lokalen Speicher deines Browsers. Sie werden nicht an uns übertragen. Cookies für Statistik und Marketing setzen wir erst, wenn du im Cookie-Banner zustimmst. Ablehnen ist genauso einfach wie zustimmen, und die Website funktioniert auch ohne Zustimmung vollständig.</p>
+<div class="tbl"><table><thead><tr><th>Name</th><th>Anbieter</th><th>Kategorie</th><th>Zweck</th><th>Dauer</th></tr></thead><tbody>
+<tr><td><code>eb-consent-v2</code></td><td>ErsteBude.ch</td><td>Notwendig</td><td>Speichert deine Wahl im Cookie-Banner (lokaler Speicher)</td><td>12 Monate</td></tr><tr><td><code>eb-checklist-v1</code></td><td>ErsteBude.ch</td><td>Notwendig</td><td>Speichert deinen Fortschritt in der Checkliste (lokaler Speicher)</td><td>bis du ihn löschst</td></tr><tr><td><code>_ga</code></td><td>Google Analytics</td><td>Statistik</td><td>Unterscheidet Besucherinnen und Besucher (pseudonyme ID)</td><td>2 Jahre</td></tr><tr><td><code>_ga_&lt;ID&gt;</code></td><td>Google Analytics</td><td>Statistik</td><td>Speichert den Sitzungsstatus</td><td>2 Jahre</td></tr><tr><td><code>_gcl_au</code></td><td>Google Ads</td><td>Marketing</td><td>Misst, ob nach einem Anzeigenklick eine Vorlage heruntergeladen wurde</td><td>90 Tage</td></tr><tr><td><code>_gcl_aw</code></td><td>Google Ads</td><td>Marketing</td><td>Speichert die Klick-ID einer Anzeige (nur wenn du über eine Anzeige kommst)</td><td>90 Tage</td></tr>
+</tbody></table></div>
+
+<h2 id="einwilligung">6. Einwilligung und Widerruf</h2>
+<p>Beim ersten Besuch fragen wir im Cookie-Banner nach deiner Einwilligung, getrennt für Statistik und Marketing. Deine Wahl gilt 12 Monate, danach fragen wir erneut. Du kannst sie jederzeit unter <button class="linklike inline" type="button" data-consent-open>Cookie-Einstellungen</button> (auch unten im Footer) ändern oder widerrufen. Nach einem Widerruf löschen wir die Cookies von Google Analytics und Google Ads in deinem Browser und laden die Tools nicht mehr. Bereits erfolgte Messungen bleiben davon unberührt.</p>
+<p>Wir nutzen den Einwilligungsmodus von Google (Consent Mode) in der strengen Variante: Ohne Zustimmung werden die Google-Skripte gar nicht geladen.</p>
+
+<h2 id="google-analytics">7. Google Analytics 4</h2>
+<p>Mit deiner Einwilligung nutzen wir Google Analytics 4. Anbieter ist für Nutzerinnen und Nutzer in der Schweiz und der EU die Google Ireland Limited, Irland; Daten können auch an die Google LLC in den USA übermittelt werden. Google Analytics zeigt uns zusammengefasst, welche Seiten aufgerufen werden, wie lange, von welcher Art Gerät, aus welcher Region und über welchen Weg (z.B. Google-Suche oder Anzeige). Dazu gehören auch Ereignisse wie abgehakte Checklisten-Punkte und Downloads.</p>
+<p>Google Analytics 4 speichert nach Angaben von Google keine vollständigen IP-Adressen. Google Signals und die Nutzung der Daten für personalisierte Werbung haben wir deaktiviert. Die Daten werden nach 2 Monaten gelöscht.</p>
+
+<h2 id="google-ads">8. Google Ads Conversion-Tracking</h2>
+<p>Wir schalten Anzeigen in der Google-Suche. Mit deiner Einwilligung für Marketing messen wir, ob nach einem Klick auf eine unserer Anzeigen die Dossier-Vorlage oder die Budget-Tabelle heruntergeladen wurde. Wir sehen dabei nur zusammengefasste Zahlen, keine einzelnen Personen. Anbieter ist die Google Ireland Limited, Irland, mit möglicher Übermittlung an die Google LLC, USA. Remarketing oder personalisierte Werbung nutzen wir nicht.</p>
+
+<h2 id="ausland">9. Übermittlung ins Ausland</h2>
+<p>GitHub und Google können Daten in den USA und in weiteren Ländern bearbeiten. Für die Übermittlung in die USA stützen wir uns auf das Swiss-U.S. bzw. EU-U.S. Data Privacy Framework, unter dem diese Unternehmen zertifiziert sind, sowie ergänzend auf die Standardvertragsklauseln der Anbieter.</p>
+
+<h2 id="email">10. Kontakt per E-Mail</h2>
+<p>Wenn du uns schreibst, verwenden wir deine Angaben nur, um deine Anfrage zu beantworten. Wir löschen die E-Mails, wenn sie erledigt sind, spätestens am Ende des Projekts.</p>
+
+<h2 id="dauer">11. Wie lange speichern wir Daten?</h2>
+<p>Nur so lange, wie es für den jeweiligen Zweck nötig ist: Statistikdaten 2 Monate (Google Analytics), Anzeigen-Cookies 90 Tage, Angaben im lokalen Speicher, bis du sie löschst (z.B. über «Alles zurücksetzen» in der Checkliste oder in den Browser-Einstellungen).</p>
+
+<h2 id="rechte">12. Deine Rechte</h2>
+<p>Du kannst jederzeit Auskunft verlangen, welche Daten wir über dich bearbeiten, und die Berichtigung oder Löschung deiner Daten verlangen. Du kannst einer Bearbeitung widersprechen, eine Einwilligung widerrufen und die Herausgabe deiner Daten verlangen. Schreib uns dazu an <span class="ph">[E-Mail-Adresse]</span>.</p>
+<p>Wenn du findest, dass wir gegen das Datenschutzrecht verstossen, kannst du dich beim Eidgenössischen Datenschutz- und Öffentlichkeitsbeauftragten (EDÖB) beschweren, bei Wohnsitz in der EU auch bei der Aufsichtsbehörde deines Landes.</p>
+
+<h2 id="sicherheit">13. Sicherheit</h2>
+<p>Die Website ist nur verschlüsselt (HTTPS) erreichbar.</p>
+
+<h2 id="aenderungen">14. Änderungen</h2>
+<p>Wir passen diese Erklärung an, wenn sich die Website oder die eingesetzten Tools ändern. Es gilt die aktuelle Version auf dieser Seite.</p>
+</div></section>
 </main>
 
 <div id="site-footer"></div>
