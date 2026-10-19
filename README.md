@@ -9,13 +9,15 @@ Läuft kostenlos auf **GitHub Pages**. Lokal ansehen: `index.html` doppelklicken
 ├── index.html            Startseite
 ├── wegweiser.html        Übersicht aller Etappen und Artikel
 ├── suchen.html  bewerben.html  kosten.html  zuegeln.html   (die 4 Etappen)
-├── checkliste.html       interaktive Checkliste (18 Punkte)
+├── checkliste.html       interaktive Checkliste (19 Punkte) + PDF
+├── vorlagen.html         alle Downloads auf einer Seite
 ├── ueber-uns.html  impressum.html  datenschutz.html  404.html
 ├── artikel/              die 8 Artikel
 ├── style.css             alle Farben und Formen (Farben ganz oben in :root)
 ├── script.js             Tracking-IDs, Menü, Footer, Cookie-Banner, Checkliste
 ├── img/                  logo/, fotos/, og-image.png (Vorschau für Social Media)
-├── downloads/            Dossier-Vorlage (Word + PDF)
+├── downloads/            Dossier-Vorlage, Budget-Tabelle, WG-Checkliste, Fragenliste, Checkliste
+├── fonts/                Schriften (lokal, keine Verbindung zu Google)
 ├── CNAME                 Domain erstebude.ch
 └── sitemap.xml  robots.txt  site.webmanifest  favicon.ico
 ```
@@ -52,7 +54,7 @@ Zwischentitel als echte Fragen formulieren und die Antwort direkt darunter: Das 
 
 **Bei jeder inhaltlichen Änderung eines Artikels** das Datum aktualisieren: im sichtbaren Text («Aktualisiert am …», `<time datetime="…">`) und im Kopfbereich bei `"dateModified"`.
 
-**Kurzantwort und FAQ:** Die Kurzantwort steht oben im Kasten «Kurz gesagt». FAQ-Antworten stehen unten in den `<details>`-Blöcken. Wenn eine FAQ beantwortet ist, kann sie auch im JSON-LD-Block im `<head>` als `FAQPage` ergänzt werden (Beispiel: `artikel/kosten-erste-wohnung-mietzinsdepot.html`).
+**Kurzantwort und FAQ:** Die Kurzantwort steht oben im Kasten «Kurz gesagt». FAQ-Antworten stehen unten in den `<details>`-Blöcken. Wenn eine FAQ beantwortet ist, kann sie auch im JSON-LD-Block im `<head>` als `FAQPage` ergänzt werden (Beispiele: `artikel/kosten-erste-wohnung-mietzinsdepot.html`, `artikel/wg-zimmer-finden.html`).
 
 ## 3. Menü und Footer ändern
 
@@ -63,14 +65,18 @@ Nur in **`script.js`, Abschnitt 2**. Die Änderung gilt sofort für alle Seiten.
 1. Einen bestehenden Artikel in `artikel/` kopieren und umbenennen (z.B. `wg-oder-eigene-wohnung.html`).
 2. Im `<head>` anpassen: `<title>`, `description`, `canonical`, `og:title`, `og:url` und den JSON-LD-Block.
 3. Inhalt ersetzen, Bild in `img/fotos/` ablegen.
-4. Eine Karte im `wegweiser.html` und auf der passenden Etappen-Seite ergänzen (bestehende `<a class="art">` kopieren).
+4. Eine Karte im `wegweiser.html` und auf der passenden Etappen-Seite ergänzen (bestehende `<a class="art">` kopieren) und den Link in den Etappen-Karten (`<div class="step">`) auf Startseite, Wegweiser und Etappen-Seiten.
 5. Die neue Adresse in `sitemap.xml` eintragen.
 
 ## 5. Fotos ersetzen
 
 In `img/fotos/` liegen Platzhalter. Eigene Fotos **mit gleichem Dateinamen** speichern (JPG, ca. 1600 × 1000 px, `hero.jpg` hochformatig ca. 1200 × 1500 px). Bildnachweise im Impressum ergänzen.
 
-## 6. Tracking und SEO-Codes
+## 6. Schriften
+
+Outfit liegt bereits in `fonts/`. **Source Sans 3** bitte einmalig ergänzen: auf fonts.google.com/specimen/Source+Sans+3 «Get font» → «Download all», aus dem ZIP den Ordner `static/` öffnen und `SourceSans3-Regular.ttf`, `SourceSans3-SemiBold.ttf` und `SourceSans3-Bold.ttf` in `fonts/` legen. Bis dahin wird eine Systemschrift verwendet. Die Seite lädt keine Schriften von Google (Datenschutz).
+
+## 7. Tracking und SEO-Codes
 
 **In `script.js`, Abschnitt 1** die IDs eintragen:
 
@@ -78,31 +84,38 @@ In `img/fotos/` liegen Platzhalter. Eigene Fotos **mit gleichem Dateinamen** spe
 |---|---|
 | `ga4_id` | Google Analytics → Verwaltung → Datenstreams → Mess-ID `G-…` |
 | `google_ads_id` | Google Ads → Ziele → Conversions → Tag einrichten → `AW-…` |
-| `google_ads_download_label` | dieselbe Conversion, Conversion-Label (Teil nach dem `/`) |
-| `meta_pixel_id` | Meta Events Manager → Pixel-ID |
+| `google_ads_label_vorlage` | Conversion-Aktion «Download Vorlage» → Conversion-Label (Teil nach dem `/`) |
+| `google_ads_label_budget` | Conversion-Aktion «Download Budget-Tabelle» → Conversion-Label |
 
 **Search Console / Bing:** In `index.html` im `<head>` den Kommentar mit `google-site-verification` bzw. `msvalidate.01` öffnen und den Code eintragen. Danach `sitemap.xml` in beiden Tools einreichen.
 
-**Einwilligung:** Ohne IDs erscheint kein Cookie-Banner. Mit IDs erscheint er beim ersten Besuch, und die Tracking-Skripte laden erst nach «Einverstanden» (Google Consent Mode v2).
+**Cookie-Banner:** Erscheint beim ersten Besuch immer (auch ohne IDs). Getrennte Wahl für Statistik (GA4) und Marketing (Google Ads), «Nur notwendige» ist gleich einfach wie «Alle akzeptieren». Die Wahl gilt 12 Monate. Google-Skripte laden erst nach Zustimmung (Consent Mode v2, strenge Variante). Nach Widerruf werden die Google-Cookies gelöscht.
 
-**Events an GA4** (in GA4 als Schlüsselereignis markieren, was wichtig ist):
+**Einstellungen in Google Analytics** (so steht es in der Datenschutzerklärung, bitte genau so einstellen):
+- Verwaltung → Datenerhebung und -aufbewahrung → Datenaufbewahrung: **2 Monate**
+- Google Signals: **aus**; Werbefunktionen / Personalisierung: **aus**
+- Verwaltung → Kontoeinstellungen: Datenverarbeitungsbedingungen akzeptieren
+- In Google Ads kein Remarketing / keine Zielgruppenlisten anlegen
+
+**Events an GA4** (in GA4 als Schlüsselereignis markieren: `generate_lead`):
 
 | Event | Wann |
 |---|---|
-| `file_download_vorlage`, `generate_lead` | Download der Dossier-Vorlage (zählt auch als Google-Ads-Conversion und Meta «Lead») |
-| `checklist_check` | Punkt in der Checkliste abgehakt |
-| `next_step_click` | Klick auf «Dein nächster Schritt» |
-| `cta_*`, `feature_hub`, `link_checkliste` | Klicks auf wichtige Buttons |
+| `generate_lead` (Parameter `lead_type` = vorlage / budget) | Download Dossier-Vorlage oder Budget-Tabelle = Kampagnenziel (zählt auch als Google-Ads-Conversion) |
+| `file_download` | jeder Download (auch WG-Checkliste, Fragenliste, Checkliste) |
+| `checklist_check`, `checklist_print` | Punkt in der Checkliste abgehakt / Seite gedruckt |
+| `zuegelplan_erstellt`, `zuegelplan_kalender` | Zügelplaner genutzt |
+| `next_step_click`, `cta_*`, `feature_hub`, `link_checkliste`, `suchabo_*` | Klicks auf wichtige Buttons |
 
-Sessions, Engaged Sessions, Returning Users und UTM-Kampagnen misst GA4 automatisch. Beispiel-Link für Anzeigen:
-`https://erstebude.ch/artikel/bewerbungsdossier-wohnung-vorlage.html?utm_source=instagram&utm_medium=paid_social&utm_campaign=dossier_nov26&utm_content=hook_a`
+Beispiel-Link für Anzeigen (Google Ads setzt meist automatisch `gclid`, UTM optional):
+`https://erstebude.ch/artikel/bewerbungsdossier-wohnung-vorlage.html?utm_source=google&utm_medium=cpc&utm_campaign=erstebude_nov26&utm_content=gruppe_a`
 
-## 7. Vor dem Livegang
+## 8. Vor dem Livegang
 
-- [ ] Alle «Text folgt»-Kästen ersetzt (in allen Dateien nach `class="todo"` suchen)
-- [ ] Impressum und Datenschutz ausgefüllt und geprüft (Platzhalter in eckigen Klammern)
+- [ ] Alle «Text folgt»-Kästen ersetzt (in allen Dateien nach `class="todo"` suchen), **zuerst Artikel 3 und 6 (Landingpages der Anzeigen)**
+- [ ] Impressum und Datenschutz: Platzhalter in eckigen Klammern ausgefüllt (Adresse, E-Mail)
+- [ ] Source Sans 3 in `fonts/` gelegt
 - [ ] Fotos ersetzt, Bildnachweise eingetragen
-- [ ] Tracking-IDs eingetragen, Cookie-Banner getestet, GA4 «DebugView» zeigt Events
+- [ ] Tracking-IDs eingetragen, Cookie-Banner getestet, GA4 «DebugView» zeigt Events, GA4-Einstellungen wie oben
 - [ ] In allen Dateien `noindex, nofollow` durch `index, follow` ersetzen (VS Code: «In Dateien ersetzen»)
 - [ ] Search Console und Bing bestätigen, `sitemap.xml` einreichen
-- [ ] Optional für den Datenschutz: Schriften lokal einbinden statt über Google Fonts und Abschnitt 3 der Datenschutzerklärung anpassen
