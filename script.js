@@ -10,7 +10,7 @@
    IDs zwischen die Anführungszeichen schreiben. Leer = Tool ist aus.
    Der Cookie-Banner erscheint beim ersten Besuch immer. */
 var EB_CONFIG = {
-  ga4_id: "",                   // Google Analytics 4, z.B. "G-AB12CD34EF"
+  ga4_id: "G-1XR3P2EMRG",                   // Google Analytics 4, z.B. "G-AB12CD34EF"
   google_ads_id: "",            // Google Ads, z.B. "AW-123456789"
   google_ads_label_vorlage: "", // Conversion-Label: Download Dossier-Vorlage (Anzeigengruppe A)
   google_ads_label_budget: ""   // Conversion-Label: Download Budget-Tabelle (Anzeigengruppe B)
