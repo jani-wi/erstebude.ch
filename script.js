@@ -10,7 +10,7 @@
    IDs zwischen die Anführungszeichen schreiben. Leer = Tool ist aus.
    Der Cookie-Banner erscheint beim ersten Besuch immer. */
 var EB_CONFIG = {
-  ga4_id: "G-1XR3P2EMRG",                   // Google Analytics 4, z.B. "G-AB12CD34EF"
+  ga4_id: "G-1XR3P2EMRG",       // Google Analytics 4
   google_ads_id: "",            // Google Ads, z.B. "AW-123456789"
   google_ads_label_vorlage: "", // Conversion-Label: Download Dossier-Vorlage (Anzeigengruppe A)
   google_ads_label_budget: ""   // Conversion-Label: Download Budget-Tabelle (Anzeigengruppe B)
@@ -260,14 +260,12 @@ document.addEventListener('DOMContentLoaded', function () {
   var form = document.querySelector('[data-planer]');
   if (form) {
     var TASKS = [
-      [-42, 'Helfer anfragen und Zügelwagen reservieren'],
-      [-28, 'Internet und Strom für die neue Wohnung bestellen'],
-      [-21, 'Hausrat- und Privathaftpflichtversicherung prüfen'],
-      [-14, 'Adressänderung bei der Post melden, Kartons besorgen'],
-      [-7, 'Bei der alten Gemeinde abmelden, Kisten fertig packen'],
-      [-1, 'Werkzeug, Putzzeug und Verpflegung für die Helfer bereitlegen'],
-      [0, 'Übergabeprotokoll ausfüllen, Mängel fotografieren, Zählerstände notieren'],
-      [14, 'Spätestens jetzt bei der neuen Gemeinde anmelden (Frist der Gemeinde prüfen)']
+      [-42, 'Transporter reservieren, Helfer anfragen, frei nehmen'],
+      [-28, 'Kartons besorgen, Internet bestellen, ausmisten'],
+      [-14, 'Nachsendeauftrag einrichten, neue Adresse melden, Parkplatz klären'],
+      [-7, 'Packen, Kisten beschriften, Essen für die Helfer planen'],
+      [0, 'Schweres zuerst laden, Möbel sichern, Übergabe: jeden Mangel ins Protokoll, Zählerstände fotografieren'],
+      [14, 'Spätestens jetzt bei der neuen Gemeinde anmelden (Art. 11 RHG), Mängel schriftlich nachreichen']
     ];
     var list = document.querySelector('[data-plan]'), actions = document.querySelector('[data-plan-actions]'), plan = [];
     function fmt(d) { return d.toLocaleDateString('de-CH', { weekday: 'short', day: 'numeric', month: 'long' }); }

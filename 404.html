@@ -4,29 +4,26 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Seite nicht gefunden | ErsteBude.ch</title>
-<meta name="description" content="Diese Seite gibt es leider nicht.">
-<!-- Vor dem Livegang auf allen Seiten ändern zu: index, follow -->
-<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Diese Seite gibt es nicht.">
+<meta name="robots" content="noindex, follow">
 <link rel="canonical" href="https://erstebude.ch/404.html">
 <meta name="theme-color" content="#1F3F66">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="de_CH">
 <meta property="og:site_name" content="ErsteBude.ch">
-<meta property="og:title" content="Seite nicht gefunden">
-<meta property="og:description" content="Diese Seite gibt es leider nicht.">
+<meta property="og:title" content="Seite nicht gefunden | ErsteBude.ch">
+<meta property="og:description" content="Diese Seite gibt es nicht.">
 <meta property="og:url" content="https://erstebude.ch/404.html">
 <meta property="og:image" content="https://erstebude.ch/img/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<!-- Search Console / Bing: Codes hier einfügen (nur in index.html nötig), z.B.
-<meta name="google-site-verification" content="CODE">
-<meta name="msvalidate.01" content="CODE"> -->
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/img/logo/erstebude_favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/img/logo/favicon-180.png">
 <link rel="manifest" href="/site.webmanifest">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap">
+<!-- Schriften liegen im Ordner fonts/ (keine Verbindung zu Google Fonts) -->
+<link rel="preload" href="/fonts/Outfit-Bold.ttf" as="font" type="font/ttf" crossorigin>
 <link rel="stylesheet" href="/style.css">
 <script type="application/ld+json">
 {
@@ -34,21 +31,22 @@
   "@graph": [
     {
       "@type": "Organization",
-      "@id": "https://erstebude.ch/index.html#org",
+      "@id": "https://erstebude.ch/#org",
       "name": "ErsteBude.ch",
       "url": "https://erstebude.ch/",
+      "slogan": "Der Wegweiser für deinen ersten Auszug",
       "logo": "https://erstebude.ch/img/logo/favicon-512.png"
     },
     {
       "@type": "WebSite",
-      "@id": "https://erstebude.ch/index.html#website",
+      "@id": "https://erstebude.ch/#website",
       "name": "ErsteBude.ch",
       "url": "https://erstebude.ch/",
       "inLanguage": "de-CH",
       "publisher": {
-        "@id": "https://erstebude.ch/index.html#org"
+        "@id": "https://erstebude.ch/#org"
       },
-      "description": "Wegweiser zur ersten eigenen Wohnung in der Schweiz."
+      "description": "Der Wegweiser für deinen ersten Auszug in der Schweiz: Wohnung oder WG suchen, bewerben, Kosten planen und zügeln."
     }
   ]
 }
@@ -61,17 +59,12 @@
 
 <!-- ================= INHALT ================= -->
 <main id="inhalt">
-<section class="page-head">
-  <div class="wrap">
-    <span class="eyebrow">Fehler 404</span>
-    <h1>Diese Tür ist leider zu</h1>
-    <p>Die Seite gibt es nicht (mehr). Vielleicht hilft dir einer dieser Wege weiter.</p>
-    <div class="cta">
-      <a class="btn btn-p" href="/index.html">Zur Startseite</a>
-      <a class="btn btn-s" href="/wegweiser.html">Zum Wegweiser</a>
-    </div>
-  </div>
-</section>
+<section class="page-head"><div class="wrap">
+  <span class="eyebrow">Fehler 404</span>
+  <h1>Diese Tür ist leider zu</h1>
+  <p>Die Seite gibt es nicht (mehr). Vielleicht hilft dir einer dieser Wege weiter.</p>
+  <div class="cta"><a class="btn btn-p" href="/index.html">Zur Startseite</a><a class="btn btn-s" href="/wegweiser.html">Zum Wegweiser</a></div>
+</div></section>
 </main>
 
 <div id="site-footer"></div>

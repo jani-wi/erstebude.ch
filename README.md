@@ -112,10 +112,12 @@ Beispiel-Link für Anzeigen (Google Ads setzt meist automatisch `gclid`, UTM opt
 
 ## 8. Vor dem Livegang
 
-- [ ] Alle «Text folgt»-Kästen ersetzt (in allen Dateien nach `class="todo"` suchen), **zuerst Artikel 3 und 6 (Landingpages der Anzeigen)**
-- [ ] Impressum und Datenschutz: Platzhalter in eckigen Klammern ausgefüllt (Adresse, E-Mail)
+- [x] Artikeltexte eingebaut (Stand 29.10.2026). Offene «Text folgt»-Kästen nur noch auf der Über-uns-Seite
+- [x] Impressum und Datenschutz mit Adresse und E-Mail
 - [ ] Source Sans 3 in `fonts/` gelegt
 - [ ] Fotos ersetzt, Bildnachweise eingetragen
 - [ ] Tracking-IDs eingetragen, Cookie-Banner getestet, GA4 «DebugView» zeigt Events, GA4-Einstellungen wie oben
-- [ ] In allen Dateien `noindex, nofollow` durch `index, follow` ersetzen (VS Code: «In Dateien ersetzen»)
+- [x] Alle Seiten auf `index, follow` (nur 404.html bleibt `noindex`)
+- [ ] Am 1. Januar 2027 prüfen: Serafe CHF 312 und Krankenkasse CHF 338.80 (Artikel 1, 4, 6 und Budget-Tabelle)
+- [ ] Quellenlinks einmal pro Semester prüfen
 - [ ] Search Console und Bing bestätigen, `sitemap.xml` einreichen
