@@ -267,6 +267,16 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .steps-list{padding-left:22px!important}
 .btn-block{width:100%}
 
+/* Artikel: Weiterlesen, Hinweis, Beispielbrief, kleiner Download */
+.weiter a{font-size:16.5px;text-decoration:none;color:var(--nacht);font-weight:700}
+.weiter a:hover{text-decoration:underline;text-decoration-color:var(--apricot)}
+.box.note{border-left:4px solid var(--apricot);background:var(--apricot-hell);display:flex;flex-direction:column;gap:8px}
+.letter{border:1px solid var(--linie);border-radius:14px;padding:20px 22px;font-style:italic;display:flex;flex-direction:column;gap:10px;background:var(--weiss)}
+.dl-mini{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;background:var(--himmel);border-radius:14px;padding:16px 20px}
+.dl-mini span{font-family:var(--fh);font-weight:700;color:var(--nacht);font-size:18px}
+.prose td strong,.prose th strong{color:var(--nacht)}
+.sources li{word-break:break-word}
+
 /* Zügelplaner */
 .planer label{font-weight:700;color:var(--nacht);display:block;margin-bottom:6px}
 .planer-row{display:flex;flex-wrap:wrap;gap:10px}
