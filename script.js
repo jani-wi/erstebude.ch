@@ -23,7 +23,6 @@ var ROOT = (document.currentScript && document.currentScript.getAttribute('src')
 var NAV = [
   ['wegweiser', 'wegweiser.html', 'Wegweiser'],
   ['checkliste', 'checkliste.html', 'Checkliste'],
-  ['vorlagen', 'vorlagen.html', 'Vorlagen'],
   ['ueber', 'ueber-uns.html', 'Über uns']
 ];
 
@@ -38,7 +37,7 @@ function headerHTML(page) {
         '<img src="' + ROOT + 'img/logo/erstebude_logo_gestapelt_farbig.svg" alt="ErsteBude.ch" width="131" height="58"></a>' +
       '<button class="menu-btn" type="button" aria-controls="nav" aria-expanded="false" aria-label="Menü öffnen">☰</button>' +
       '<nav class="nav" id="nav" aria-label="Hauptnavigation">' + links + '</nav>' +
-      '<a class="btn btn-p" href="' + ROOT + 'artikel/bewerbungsdossier-wohnung-vorlage.html#vorlage" data-track="cta_header_vorlage">↓ Gratis Vorlage</a>' +
+      '<a class="btn btn-p" href="' + ROOT + 'vorlagen.html"' + (page === 'vorlagen' ? ' aria-current="page"' : '') + ' data-track="cta_header_vorlagen">Gratis Vorlagen</a>' +
     '</div></header>';
 }
 
@@ -59,18 +58,19 @@ function footerHTML() {
         '<li><a href="' + ROOT + 'vorlagen.html">Alle Vorlagen</a></li></ul></div>' +
       '<div><h2>ErsteBude.ch</h2><ul>' +
         '<li><a href="' + ROOT + 'ueber-uns.html">Über uns</a></li>' +
+        '<li><a href="mailto:1erstebude@gmail.com" data-track="contact_click" data-where="footer">Kontakt</a></li>' +
         '<li><a href="' + ROOT + 'impressum.html">Impressum</a></li>' +
         '<li><a href="' + ROOT + 'datenschutz.html">Datenschutz</a></li>' +
         '<li><button class="linklike" type="button" data-consent-open>Cookie-Einstellungen</button></li></ul></div>' +
       '<div class="legal"><span>Ein Studierendenprojekt im Modul Digital Marketing, FH Graubünden · ' + y + '</span>' +
-        '<span>Keine Rechtsberatung. Bei Fragen zum Mietrecht hilft der Mieterinnen- und Mieterverband.</span></div>' +
+        '<span>Keine Rechtsberatung. Bei Fragen zum Mietrecht hilft der <a href="https://www.mieterverband.ch/" rel="noopener" target="_blank">Mieterinnen- und Mieterverband</a>.</span></div>' +
     '</div></footer>' +
     cookieHTML();
 }
 
 function cookieHTML() {
   return '' +
-    '<div class="cookie" id="cookie" role="dialog" aria-modal="false" aria-labelledby="cookie-title" hidden>' +
+    '<div class="cookie-wrap" id="cookie" hidden><div class="cookie" role="dialog" aria-modal="true" aria-labelledby="cookie-title">' +
       '<div class="cookie-main">' +
         '<b id="cookie-title">Darf ErsteBude.ch messen?</b>' +
         '<p>Mit deiner Zustimmung messen wir mit Google Analytics, welche Inhalte dir helfen, und mit Google Ads, ob unsere Anzeigen funktionieren. Ohne Zustimmung messen wir nichts, die Seite funktioniert trotzdem vollständig. Deine Wahl kannst du jederzeit unter «Cookie-Einstellungen» im Footer ändern. <a href="' + ROOT + 'datenschutz.html">Mehr in der Datenschutzerklärung</a></p>' +
@@ -86,7 +86,7 @@ function cookieHTML() {
         '<button class="btn btn-s" type="button" data-consent="prefs" aria-expanded="false" aria-controls="cookie-prefs">Einstellungen</button>' +
         '<button class="btn btn-s" type="button" data-consent="save" hidden>Auswahl speichern</button>' +
       '</div>' +
-    '</div>';
+    '</div></div>';
 }
 
 /* 3. EINWILLIGUNG UND TRACKING ---------------------------------------------
@@ -154,11 +154,13 @@ var EB = (function () {
     el('pref-marketing').checked = !!(state && state.marketing);
     showPrefs(!!withPrefs);
     b.hidden = false;
+    document.documentElement.classList.add('cookie-open');
   }
   function decide(s) {
     var before = state;
     set(s);
     el('cookie').hidden = true;
+    document.documentElement.classList.remove('cookie-open');
     var revoked = before && ((before.analytics && !s.analytics) || (before.marketing && !s.marketing));
     if (revoked) { clearCookies(); if (loaded) { location.reload(); return; } }
     load();
@@ -252,15 +254,44 @@ document.addEventListener('DOMContentLoaded', function () {
       EB.track('file_download', { file_name: file, link_url: a.getAttribute('href') });
       if (a.hasAttribute('data-conversion')) EB.conversion(a.getAttribute('data-conversion'), { file_name: file });
     } else if (a.hasAttribute('data-track')) {
-      EB.track(a.getAttribute('data-track'), { link_text: a.textContent.trim().slice(0, 80), link_url: a.getAttribute('href') });
+      EB.track(a.getAttribute('data-track'), { link_text: a.textContent.trim().slice(0, 80), link_url: a.getAttribute('href'), placement: a.getAttribute('data-where') || page });
+    } else if (/^https?:/.test(a.getAttribute('href') || '') && a.hostname !== location.hostname) {
+      EB.track('outbound_click', { link_url: a.href, link_domain: a.hostname });
     }
   });
+
+  /* Durchsuchbare Liste (Wohnungsbörsen) */
+  document.querySelectorAll('[data-filter]').forEach(function (box) {
+    var input = box.querySelector('[data-filter-input]'), rows = box.querySelectorAll('[data-filter-row]');
+    var count = box.querySelector('[data-filter-count]'), empty = box.querySelector('[data-filter-empty]'), timer;
+    function norm(s) { return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+    function run() {
+      var q = norm(input.value.trim()), n = 0;
+      rows.forEach(function (r) { var hit = !q || q.split(/\s+/).every(function (w) { return norm(r.textContent).indexOf(w) > -1; }); r.hidden = !hit; if (hit) n++; });
+      count.textContent = q ? n + ' von ' + rows.length + ' Angeboten' : rows.length + ' Angebote';
+      empty.hidden = n > 0;
+    }
+    input.addEventListener('input', function () {
+      run(); clearTimeout(timer);
+      timer = setTimeout(function () { if (input.value.trim().length > 1) EB.track('search', { search_term: input.value.trim().slice(0, 60), list: 'wohnungsboersen' }); }, 1200);
+    });
+    run();
+  });
+
+  /* Artikel zu Ende gelesen (GA4-Event, nur mit Einwilligung) */
+  var endMark = document.querySelector('[data-article-end]'), art = document.querySelector('[data-article]');
+  if (endMark && art && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (en) {
+      if (en[0].isIntersecting) { EB.track('article_read_end', { article: art.getAttribute('data-article') }); io.disconnect(); }
+    });
+    io.observe(endMark);
+  }
 
   /* Zügelplaner: rechnet ab dem Zügeltag rückwärts (nur im Browser) */
   var form = document.querySelector('[data-planer]');
   if (form) {
     var TASKS = [
-      [-42, 'Transporter reservieren, Helfer anfragen, frei nehmen'],
+      [-42, 'Transporter reservieren, Helfer und Freunde anfragen, frei nehmen'],
       [-28, 'Kartons besorgen, Internet bestellen, ausmisten'],
       [-14, 'Nachsendeauftrag einrichten, neue Adresse melden, Parkplatz klären'],
       [-7, 'Packen, Kisten beschriften, Essen für die Helfer planen'],

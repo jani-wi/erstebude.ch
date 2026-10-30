@@ -106,16 +106,24 @@ Outfit liegt bereits in `fonts/`. **Source Sans 3** bitte einmalig ergänzen: au
 | `checklist_check`, `checklist_print` | Punkt in der Checkliste abgehakt / Seite gedruckt |
 | `zuegelplan_erstellt`, `zuegelplan_kalender` | Zügelplaner genutzt |
 | `next_step_click`, `cta_*`, `feature_hub`, `link_checkliste`, `suchabo_*` | Klicks auf wichtige Buttons |
+| `contact_click` (Parameter `placement`) | Klick auf «Schreib uns eine E-Mail» (Startseite, Artikel, Etappen, Footer) |
+| `article_read_end` (Parameter `article`) | Artikel bis zum Ende gelesen |
+| `search` (Parameter `search_term`) | Suche in der Liste der Wohnungsbörsen |
+| `outbound_click` | Klick auf einen Link zu einer anderen Website (Quellen, Plattformen) |
+
+**GEO (KI-Suche):** `llms.txt` im Hauptordner beschreibt die Website und listet alle Artikel. Jeder Artikel hat «Kurz gesagt», FAQ (als FAQPage-Daten) und ein Quellenverzeichnis mit Links.
+
+**Bing Webmaster Tools:** bing.com/webmasters → «Aus Google Search Console importieren» wählen. Dann ist die Website ohne Code bestätigt und die Sitemap übernommen.
 
 Beispiel-Link für Anzeigen (Google Ads setzt meist automatisch `gclid`, UTM optional):
 `https://erstebude.ch/artikel/bewerbungsdossier-wohnung-vorlage.html?utm_source=google&utm_medium=cpc&utm_campaign=erstebude_nov26&utm_content=gruppe_a`
 
 ## 8. Vor dem Livegang
 
-- [x] Artikeltexte eingebaut (Stand 29.10.2026). Offene «Text folgt»-Kästen nur noch auf der Über-uns-Seite
+- [x] Artikeltexte eingebaut (Stand 30.10.2026, 9 Artikel inkl. Wochenaufenthalt). Offene «Text folgt»-Kästen nur noch auf der Über-uns-Seite
 - [x] Impressum und Datenschutz mit Adresse und E-Mail
 - [ ] Source Sans 3 in `fonts/` gelegt
-- [ ] Fotos ersetzt, Bildnachweise eingetragen
+- [x] Fotos ersetzt, Bildnachweise eingetragen
 - [ ] Tracking-IDs eingetragen, Cookie-Banner getestet, GA4 «DebugView» zeigt Events, GA4-Einstellungen wie oben
 - [x] Alle Seiten auf `index, follow` (nur 404.html bleibt `noindex`)
 - [ ] Am 1. Januar 2027 prüfen: Serafe CHF 312 und Krankenkasse CHF 338.80 (Artikel 1, 4, 6 und Budget-Tabelle)

@@ -1,0 +1,33 @@
+# ErsteBude.ch
+
+> Der Wegweiser für deinen ersten Auszug in der Schweiz. Ein unabhängiges Studierendenprojekt der FH Graubünden für junge Erwachsene (18 bis 26), die zum ersten Mal ausziehen: Wohnung oder WG-Zimmer suchen, sich bewerben, Kosten planen und zügeln. Ohne Verkaufsinteresse, mit Quellen.
+
+Alle Artikel nennen ihre Quellen (Gesetze, Bundesämter, Fachstellen) und haben einen Kurz-gesagt-Abschnitt und häufige Fragen.
+
+## Überblick
+- [Erste eigene Wohnung: 10 Tipps für den ersten Auszug](https://erstebude.ch/artikel/erste-eigene-wohnung-tipps.html): Du ziehst zum ersten Mal aus? Budget, Dossier, Mietvertrag, Versicherung und Einzug: zehn Tipps für Erstausziehende in der Schweiz, mit Gesetzesgrundlagen.
+
+## Suchen
+- [Wohnung suchen in der Schweiz: Die besten Plattformen und Tricks](https://erstebude.ch/artikel/wohnung-finden-schweiz-tipps.html): Wo suchst du am besten nach einer Wohnung oder einem WG-Zimmer? Die wichtigsten Plattformen, Wohnungsbörsen der Hochschulen nach Ort, ein gutes Suchabo und Tipps, mit denen du schneller bist.
+- [WG-Zimmer finden: Wo du suchst, wie du beim Casting überzeugst, was du klären musst](https://erstebude.ch/artikel/wg-zimmer-finden.html): So findest du ein WG-Zimmer in der Schweiz: die besten Plattformen, Tipps fürs WG-Casting und was du zu Untermiete, Haftung und gemeinsamen Kosten wissen musst.
+
+## Bewerben
+- [Das perfekte Bewerbungsdossier: Alle Unterlagen von Betreibungsauszug bis Bürgschaft, mit Vorlage](https://erstebude.ch/artikel/bewerbungsdossier-wohnung-vorlage.html): Was gehört in die Wohnungsbewerbung und wann? Alle Unterlagen nach den Regeln des EDÖB, Betreibungsauszug, Bürgschaft und eine Vorlage zum Download.
+- [Die Wohnungsbesichtigung: 10 Fragen, die du stellen solltest](https://erstebude.ch/artikel/wohnungsbesichtigung-fragen.html): Welche 10 Fragen stellst du bei der Wohnungsbesichtigung, die nicht im Inserat stehen? Nebenkosten, Mängel, Hausordnung und wie du positiv auffällst. Mit Fragenliste.
+
+## Kosten
+- [Kaution, Miete, Nebenkosten: Wie viel Geld brauche ich wirklich?](https://erstebude.ch/artikel/kosten-erste-wohnung-mietzinsdepot.html): Was kostet die erste Wohnung in der Schweiz? Mietzinsdepot oder Mietkautionsversicherung, Startkosten, Steuern und ein Monatsbudget mit Zahlen für 2027. Mit Budget-Tabelle.
+
+## Zügeln
+- [Die ultimative Auszugs-Checkliste: Adresse ummelden, Versicherungen, Internet & Co.](https://erstebude.ch/artikel/umzug-checkliste-erste-wohnung.html): Was musst du nach der Unterschrift erledigen? Depot, Versicherung, Internet, Anmeldung bei der Gemeinde und Mängelliste, Schritt für Schritt.
+- [Zügeln ohne Stress: Zügelwagen, Helfer, Kosten & Zeitplan](https://erstebude.ch/artikel/zuegeln-tipps.html): Selber zügeln oder mit Firma? Was du mit dem Ausweis B fahren darfst, was ein Umzug kostet und ein Zeitplan von sechs Wochen vorher bis zur Übergabe.
+- [Neue Wohnung oder Wochenaufenthalt: Was passt zu dir?](https://erstebude.ch/artikel/wochenaufenthalt.html): Wochenaufenthalt einfach erklärt: wer Wochenaufenthalter ist, wie die Anmeldung mit Heimatausweis funktioniert, Vor- und Nachteile und was bei Steuern und Serafe gilt.
+
+## Hilfsmittel
+- [Checkliste erster Auszug](https://erstebude.ch/checkliste.html): 24 Schritte zum Abhaken
+- [Gratis Vorlagen](https://erstebude.ch/vorlagen.html): Bewerbungsdossier (Word, PDF), Budget-Tabelle (Excel), WG-Checkliste, Fragenliste Besichtigung, Auszugs-Checkliste
+
+## Über das Projekt
+- [Über uns](https://erstebude.ch/ueber-uns.html)
+- [Impressum](https://erstebude.ch/impressum.html)
+- Kontakt: 1erstebude@gmail.com
