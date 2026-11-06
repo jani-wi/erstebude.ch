@@ -23,7 +23,8 @@ var ROOT = (document.currentScript && document.currentScript.getAttribute('src')
 var NAV = [
   ['wegweiser', 'wegweiser', 'Wegweiser'],
   ['checkliste', 'checkliste', 'Checkliste'],
-  ['ueber', 'ueber-uns', 'Über uns']
+  ['ueber', 'ueber-uns', 'Über uns'],
+  ['vorlagen', 'vorlagen', 'Gratis Vorlagen']
 ];
 
 /* Alle Artikel nach Etappen: für das Wegweiser-Menü und die Übersicht links in den Artikeln */
@@ -46,7 +47,8 @@ function etappenHTML(current) {
 
 function headerHTML(page) {
   var links = NAV.map(function (n) {
-    var link = '<a href="' + ROOT + n[1] + '"' + (n[0] === page ? ' aria-current="page"' : '') + '>' + n[2] + '</a>';
+    var link = '<a href="' + ROOT + n[1] + '"' + (n[0] === page ? ' aria-current="page"' : '') +
+      (n[0] === 'vorlagen' ? ' class="nav-cta" data-track="cta_header_vorlagen"' : '') + '>' + n[2] + '</a>';
     if (n[0] !== 'wegweiser') return link;
     return '<div class="nav-drop">' + link +
       '<button class="drop-btn" type="button" aria-expanded="false" aria-controls="mega" aria-label="Alle Etappen und Artikel anzeigen"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>' +
@@ -60,7 +62,6 @@ function headerHTML(page) {
         '<img src="' + ROOT + 'img/logo/erstebude_logo_gestapelt_farbig.svg" alt="erstebude.ch" width="131" height="58"></a>' +
       '<button class="menu-btn" type="button" aria-controls="nav" aria-expanded="false" aria-label="Menü öffnen">☰</button>' +
       '<nav class="nav" id="nav" aria-label="Hauptnavigation">' + links + '</nav>' +
-      '<a class="btn btn-p cta-vorlagen" href="' + ROOT + 'vorlagen"' + (page === 'vorlagen' ? ' aria-current="page"' : '') + ' aria-label="Gratis Vorlagen: Word, PDF und Excel" data-track="cta_header_vorlagen"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M12 11v6"/><path d="M9.5 14.5L12 17l2.5-2.5"/></svg><span><span class="cta-l">Gratis Vorlagen</span><small>Word, PDF, Excel</small></span></a>' +
     '</div></header>';
 }
 
