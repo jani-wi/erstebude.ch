@@ -26,9 +26,32 @@ var NAV = [
   ['ueber', 'ueber-uns', 'Über uns']
 ];
 
+/* Alle Artikel nach Etappen: für das Wegweiser-Menü und die Übersicht links in den Artikeln */
+var ETAPPEN = [
+  ['', 'Überblick', [['erste-eigene-wohnung-tipps', '10 Tipps für den ersten Auszug']]],
+  ['suchen', 'Etappe 1 · Suchen', [['wohnung-finden-schweiz-tipps', 'Wohnung suchen: Plattformen & Tricks'], ['wg-zimmer-finden', 'WG-Zimmer & Casting'], ['wochenaufenthalt', 'Wohnung oder Wochenaufenthalt']]],
+  ['bewerben', 'Etappe 2 · Bewerben', [['bewerbungsdossier-wohnung-vorlage', 'Bewerbungsdossier mit Vorlage'], ['wohnungsbesichtigung-fragen', 'Besichtigung: 10 Fragen']]],
+  ['kosten', 'Etappe 3 · Kosten', [['kosten-erste-wohnung-mietzinsdepot', 'Kaution, Miete, Nebenkosten']]],
+  ['zuegeln', 'Etappe 4 · Zügeln', [['umzug-checkliste-erste-wohnung', 'Umzugs-Checkliste'], ['zuegeln-tipps', 'Zügeln ohne Stress']]]
+];
+function esc(t) { return t.replace(/&/g, '&amp;'); }
+function etappenHTML(current) {
+  return ETAPPEN.map(function (e) {
+    var head = e[0] ? '<a class="et-head" href="' + ROOT + e[0] + '">' + e[1] + '</a>' : '<span class="et-head">' + e[1] + '</span>';
+    return '<div class="et">' + head + '<ul>' + e[2].map(function (a) {
+      return '<li><a href="' + ROOT + 'artikel/' + a[0] + '"' + (a[0] === current ? ' aria-current="page"' : '') + '>' + esc(a[1]) + '</a></li>';
+    }).join('') + '</ul></div>';
+  }).join('');
+}
+
 function headerHTML(page) {
   var links = NAV.map(function (n) {
-    return '<a href="' + ROOT + n[1] + '"' + (n[0] === page ? ' aria-current="page"' : '') + '>' + n[2] + '</a>';
+    var link = '<a href="' + ROOT + n[1] + '"' + (n[0] === page ? ' aria-current="page"' : '') + '>' + n[2] + '</a>';
+    if (n[0] !== 'wegweiser') return link;
+    return '<div class="nav-drop">' + link +
+      '<button class="drop-btn" type="button" aria-expanded="false" aria-controls="mega" aria-label="Alle Etappen und Artikel anzeigen"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>' +
+      '<div class="mega" id="mega"><div class="mega-in">' + etappenHTML(document.body.getAttribute('data-article') || '') +
+      '</div><a class="mega-all" href="' + ROOT + 'wegweiser">Zum ganzen Wegweiser →</a></div></div>';
   }).join('');
   return '' +
     '<a class="skip" href="#inhalt">Zum Inhalt springen</a>' +
@@ -199,7 +222,35 @@ var EB = (function () {
 document.addEventListener('DOMContentLoaded', function () {
   var page = document.body.getAttribute('data-page') || '';
   var h = document.getElementById('site-header'), f = document.getElementById('site-footer');
+  var prose = document.querySelector('.prose[data-article]');
+  if (prose) document.body.setAttribute('data-article', prose.getAttribute('data-article'));
   if (h) h.outerHTML = headerHTML(page);
+
+  /* Übersicht aller Artikel links neben dem Artikel */
+  if (prose) {
+    var lay = document.createElement('div'); lay.className = 'art-layout';
+    prose.parentNode.insertBefore(lay, prose);
+    var side = document.createElement('aside'); side.className = 'art-nav'; side.setAttribute('aria-label', 'Alle Artikel');
+    side.innerHTML = '<div class="art-nav-in"><b class="art-nav-t">Alle Artikel</b>' + etappenHTML(prose.getAttribute('data-article')) +
+      '<div class="et"><span class="et-head">Hilfsmittel</span><ul><li><a href="' + ROOT + 'checkliste">Checkliste</a></li><li><a href="' + ROOT + 'vorlagen">Gratis Vorlagen</a></li></ul></div></div>';
+    lay.appendChild(side); lay.appendChild(prose);
+  }
+
+  /* Wegweiser-Menü: Klick auf den Pfeil (Touch, Tastatur) */
+  var dropBtn = document.querySelector('.drop-btn');
+  if (dropBtn) {
+    dropBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var o = dropBtn.parentNode.classList.toggle('open');
+      dropBtn.setAttribute('aria-expanded', o ? 'true' : 'false');
+    });
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('.nav-drop')) { dropBtn.parentNode.classList.remove('open'); dropBtn.setAttribute('aria-expanded', 'false'); }
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { dropBtn.parentNode.classList.remove('open'); dropBtn.setAttribute('aria-expanded', 'false'); }
+    });
+  }
   if (f) f.outerHTML = footerHTML();
   EB.init();
 
