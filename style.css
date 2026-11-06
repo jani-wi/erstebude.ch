@@ -448,3 +448,17 @@ a.et-head:hover{text-decoration:underline}
 }
 @media print{.art-nav,.mega{display:none!important}}
 .mega a.et-head,.art-nav a.et-head{color:#B9501F}
+
+/* Header-Button «Gratis Vorlagen»: klar als Download erkennbar */
+.site-header .cta-vorlagen{display:inline-flex;align-items:center;gap:10px;border-radius:12px;padding:8px 16px 8px 13px;line-height:1.15;text-align:left}
+.cta-vorlagen svg{flex:none}
+.cta-vorlagen > span{display:flex;flex-direction:column;font-size:15.5px}
+.cta-vorlagen small{font-size:12px;font-weight:600;opacity:.85;letter-spacing:.01em}
+@media (max-width:980px){
+  .site-header .cta-vorlagen{display:inline-flex;order:2;margin-left:auto;padding:8px 12px;font-size:14.5px}
+  .cta-vorlagen small{display:none}
+  .menu-btn{order:3;margin-left:10px!important}
+}
+@media (max-width:340px){.cta-vorlagen > span{display:none}}
+@media (max-width:980px){.site-header .wrap{gap:10px}}
+@media (max-width:480px){.cta-vorlagen .cta-l{font-size:0}.cta-vorlagen .cta-l::after{content:"Vorlagen";font-size:14.5px}}

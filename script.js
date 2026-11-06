@@ -60,7 +60,7 @@ function headerHTML(page) {
         '<img src="' + ROOT + 'img/logo/erstebude_logo_gestapelt_farbig.svg" alt="erstebude.ch" width="131" height="58"></a>' +
       '<button class="menu-btn" type="button" aria-controls="nav" aria-expanded="false" aria-label="Menü öffnen">☰</button>' +
       '<nav class="nav" id="nav" aria-label="Hauptnavigation">' + links + '</nav>' +
-      '<a class="btn btn-p" href="' + ROOT + 'vorlagen"' + (page === 'vorlagen' ? ' aria-current="page"' : '') + ' data-track="cta_header_vorlagen">Gratis Vorlagen</a>' +
+      '<a class="btn btn-p cta-vorlagen" href="' + ROOT + 'vorlagen"' + (page === 'vorlagen' ? ' aria-current="page"' : '') + ' aria-label="Gratis Vorlagen: Word, PDF und Excel" data-track="cta_header_vorlagen"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M12 11v6"/><path d="M9.5 14.5L12 17l2.5-2.5"/></svg><span><span class="cta-l">Gratis Vorlagen</span><small>Word, PDF, Excel</small></span></a>' +
     '</div></header>';
 }
 
