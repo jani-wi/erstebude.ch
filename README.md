@@ -1,4 +1,4 @@
-# ErsteBude.ch – Website
+# erstebude.ch – Website
 
 Reines HTML, CSS und JavaScript. Kein Build-Schritt: Datei öffnen, ändern, hochladen.
 Läuft kostenlos auf **GitHub Pages**. Lokal ansehen: `index.html` doppelklicken.
@@ -116,7 +116,7 @@ Outfit liegt bereits in `fonts/`. **Source Sans 3** bitte einmalig ergänzen: au
 **Bing Webmaster Tools:** bing.com/webmasters → «Aus Google Search Console importieren» wählen. Dann ist die Website ohne Code bestätigt und die Sitemap übernommen.
 
 Beispiel-Link für Anzeigen (Google Ads setzt meist automatisch `gclid`, UTM optional):
-`https://erstebude.ch/artikel/bewerbungsdossier-wohnung-vorlage.html?utm_source=google&utm_medium=cpc&utm_campaign=erstebude_nov26&utm_content=gruppe_a`
+`https://erstebude.ch/artikel/bewerbungsdossier-wohnung-vorlage?utm_source=google&utm_medium=cpc&utm_campaign=erstebude_nov26&utm_content=gruppe_a`
 
 ## 8. Vor dem Livegang
 

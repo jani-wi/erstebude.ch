@@ -1,5 +1,5 @@
 /* ==========================================================================
-   ErsteBude.ch – script.js
+   erstebude.ch – script.js
    1. Einstellungen (Tracking-IDs)        ← hier IDs eintragen
    2. Header, Footer, Cookie-Banner       ← Menü und Footer nur hier ändern
    3. Einwilligung und Tracking
@@ -21,9 +21,9 @@ var ROOT = (document.currentScript && document.currentScript.getAttribute('src')
 
 /* 2. HEADER, FOOTER, COOKIE-BANNER ---------------------------------------- */
 var NAV = [
-  ['wegweiser', 'wegweiser.html', 'Wegweiser'],
-  ['checkliste', 'checkliste.html', 'Checkliste'],
-  ['ueber', 'ueber-uns.html', 'Über uns']
+  ['wegweiser', 'wegweiser', 'Wegweiser'],
+  ['checkliste', 'checkliste', 'Checkliste'],
+  ['ueber', 'ueber-uns', 'Über uns']
 ];
 
 function headerHTML(page) {
@@ -33,11 +33,11 @@ function headerHTML(page) {
   return '' +
     '<a class="skip" href="#inhalt">Zum Inhalt springen</a>' +
     '<header class="site-header"><div class="wrap">' +
-      '<a class="logo" href="' + ROOT + 'index.html" aria-label="ErsteBude.ch – zur Startseite">' +
-        '<img src="' + ROOT + 'img/logo/erstebude_logo_gestapelt_farbig.svg" alt="ErsteBude.ch" width="131" height="58"></a>' +
+      '<a class="logo" href="' + (ROOT || './') + '" aria-label="erstebude.ch – zur Startseite">' +
+        '<img src="' + ROOT + 'img/logo/erstebude_logo_gestapelt_farbig.svg" alt="erstebude.ch" width="131" height="58"></a>' +
       '<button class="menu-btn" type="button" aria-controls="nav" aria-expanded="false" aria-label="Menü öffnen">☰</button>' +
       '<nav class="nav" id="nav" aria-label="Hauptnavigation">' + links + '</nav>' +
-      '<a class="btn btn-p" href="' + ROOT + 'vorlagen.html"' + (page === 'vorlagen' ? ' aria-current="page"' : '') + ' data-track="cta_header_vorlagen">Gratis Vorlagen</a>' +
+      '<a class="btn btn-p" href="' + ROOT + 'vorlagen"' + (page === 'vorlagen' ? ' aria-current="page"' : '') + ' data-track="cta_header_vorlagen">Gratis Vorlagen</a>' +
     '</div></header>';
 }
 
@@ -45,22 +45,22 @@ function footerHTML() {
   var y = new Date().getFullYear();
   return '' +
     '<footer class="site-footer"><div class="wrap">' +
-      '<div class="flogo"><img src="' + ROOT + 'img/logo/erstebude_logo_slogan_gestapelt_weiss.svg" alt="ErsteBude.ch – Der Wegweiser für deinen ersten Auszug" width="220" height="124" loading="lazy"></div>' +
-      '<div><h2>Wegweiser</h2><ul>' +
-        '<li><a href="' + ROOT + 'suchen.html">1 · Suchen</a></li>' +
-        '<li><a href="' + ROOT + 'bewerben.html">2 · Bewerben</a></li>' +
-        '<li><a href="' + ROOT + 'kosten.html">3 · Kosten</a></li>' +
-        '<li><a href="' + ROOT + 'zuegeln.html">4 · Zügeln</a></li></ul></div>' +
-      '<div><h2>Hilfsmittel</h2><ul>' +
-        '<li><a href="' + ROOT + 'artikel/bewerbungsdossier-wohnung-vorlage.html">Dossier-Vorlage</a></li>' +
-        '<li><a href="' + ROOT + 'artikel/kosten-erste-wohnung-mietzinsdepot.html#budget">Budget-Tabelle</a></li>' +
-        '<li><a href="' + ROOT + 'checkliste.html">Checkliste</a></li>' +
-        '<li><a href="' + ROOT + 'vorlagen.html">Alle Vorlagen</a></li></ul></div>' +
-      '<div><h2>ErsteBude.ch</h2><ul>' +
-        '<li><a href="' + ROOT + 'ueber-uns.html">Über uns</a></li>' +
+      '<div class="flogo"><img src="' + ROOT + 'img/logo/erstebude_logo_slogan_gestapelt_weiss.svg" alt="erstebude.ch – Der Wegweiser für deinen ersten Auszug" width="220" height="124" loading="lazy"></div>' +
+      '<div><h2><a href="' + ROOT + 'wegweiser">Wegweiser</a></h2><ul>' +
+        '<li><a href="' + ROOT + 'suchen">1 · Suchen</a></li>' +
+        '<li><a href="' + ROOT + 'bewerben">2 · Bewerben</a></li>' +
+        '<li><a href="' + ROOT + 'kosten">3 · Kosten</a></li>' +
+        '<li><a href="' + ROOT + 'zuegeln">4 · Zügeln</a></li></ul></div>' +
+      '<div><h2><a href="' + ROOT + 'vorlagen">Hilfsmittel</a></h2><ul>' +
+        '<li><a href="' + ROOT + 'artikel/bewerbungsdossier-wohnung-vorlage">Dossier-Vorlage</a></li>' +
+        '<li><a href="' + ROOT + 'artikel/kosten-erste-wohnung-mietzinsdepot#budget">Budget-Tabelle</a></li>' +
+        '<li><a href="' + ROOT + 'checkliste">Checkliste</a></li>' +
+        '<li><a href="' + ROOT + 'vorlagen">Alle Vorlagen</a></li></ul></div>' +
+      '<div><h2><a href="' + (ROOT || './') + '">erstebude.ch</a></h2><ul>' +
+        '<li><a href="' + ROOT + 'ueber-uns">Über uns</a></li>' +
         '<li><a href="mailto:1erstebude@gmail.com" data-track="contact_click" data-where="footer">Kontakt</a></li>' +
-        '<li><a href="' + ROOT + 'impressum.html">Impressum</a></li>' +
-        '<li><a href="' + ROOT + 'datenschutz.html">Datenschutz</a></li>' +
+        '<li><a href="' + ROOT + 'impressum">Impressum</a></li>' +
+        '<li><a href="' + ROOT + 'datenschutz">Datenschutz</a></li>' +
         '<li><button class="linklike" type="button" data-consent-open>Cookie-Einstellungen</button></li></ul></div>' +
       '<div class="legal"><span>Ein Studierendenprojekt im Modul Digital Marketing, FH Graubünden · ' + y + '</span>' +
         '<span>Keine Rechtsberatung. Bei Fragen zum Mietrecht hilft der <a href="https://www.mieterverband.ch/" rel="noopener" target="_blank">Mieterinnen- und Mieterverband</a>.</span></div>' +
@@ -72,8 +72,8 @@ function cookieHTML() {
   return '' +
     '<div class="cookie-wrap" id="cookie" hidden><div class="cookie" role="dialog" aria-modal="true" aria-labelledby="cookie-title">' +
       '<div class="cookie-main">' +
-        '<b id="cookie-title">Darf ErsteBude.ch messen?</b>' +
-        '<p>Mit deiner Zustimmung messen wir mit Google Analytics, welche Inhalte dir helfen, und mit Google Ads, ob unsere Anzeigen funktionieren. Ohne Zustimmung messen wir nichts, die Seite funktioniert trotzdem vollständig. Deine Wahl kannst du jederzeit unter «Cookie-Einstellungen» im Footer ändern. <a href="' + ROOT + 'datenschutz.html">Mehr in der Datenschutzerklärung</a></p>' +
+        '<b id="cookie-title">Darf erstebude.ch messen?</b>' +
+        '<p>Mit deiner Zustimmung messen wir mit Google Analytics, welche Inhalte dir helfen, und mit Google Ads, ob unsere Anzeigen funktionieren. Ohne Zustimmung messen wir nichts, die Seite funktioniert trotzdem vollständig. Deine Wahl kannst du jederzeit unter «Cookie-Einstellungen» im Footer ändern. <a href="' + ROOT + 'datenschutz">Mehr in der Datenschutzerklärung</a></p>' +
       '</div>' +
       '<div class="cookie-prefs" id="cookie-prefs" hidden>' +
         '<label class="pref"><input type="checkbox" checked disabled><span><b>Notwendig</b><small>Speichert deine Cookie-Wahl und deinen Checklisten-Fortschritt in deinem Browser. Immer aktiv.</small></span></label>' +
@@ -308,12 +308,20 @@ document.addEventListener('DOMContentLoaded', function () {
       list.innerHTML = plan.map(function (p) {
         return '<li' + (p.n === 0 ? ' class="day"' : '') + '><span class="when"><b>' + fmt(p.d) + '</b>' + rel(p.n) + '</span><span>' + p.t + '</span></li>';
       }).join('');
+      var today = new Date(); today.setHours(12, 0, 0, 0);
+      var days = Math.round((day - today) / 86400000), warn = document.querySelector('[data-plan-warn]');
+      plan.forEach(function (p, i) { if (p.d < today) list.children[i].classList.add('late'); });
+      if (warn) {
+        if (days < 0) warn.textContent = 'Dieses Datum liegt in der Vergangenheit. Wähl deinen kommenden Zügeltag.';
+        else if (days < 42) warn.textContent = 'Achtung: Dein Zügeltag ist schon in ' + (days === 1 ? 'einem Tag' : days + ' Tagen') + '. Der Plan rechnet mit 6 Wochen Vorlauf. Die grau markierten Punkte sind schon vorbei: Erledige sie so bald wie möglich, vor allem Transporter und Helfer.';
+        warn.hidden = days >= 42;
+      }
       list.hidden = false; actions.hidden = false;
-      EB.track('zuegelplan_erstellt');
+      EB.track('zuegelplan_erstellt', { tage_bis_zuegeltag: days });
     });
     document.querySelector('[data-ics]').addEventListener('click', function () {
       function ymd(d) { return d.getFullYear() + ('0' + (d.getMonth() + 1)).slice(-2) + ('0' + d.getDate()).slice(-2); }
-      var lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//ErsteBude.ch//Zuegelplan//DE'];
+      var lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//erstebude.ch//Zuegelplan//DE'];
       plan.forEach(function (p, i) {
         var end = new Date(p.d); end.setDate(end.getDate() + 1);
         lines.push('BEGIN:VEVENT', 'UID:zuegelplan-' + ymd(p.d) + '-' + i + '@erstebude.ch', 'DTSTAMP:' + ymd(new Date()) + 'T000000Z',
