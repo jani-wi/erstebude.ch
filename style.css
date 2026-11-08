@@ -413,8 +413,9 @@ button.linklike.inline{color:var(--nacht);font-weight:600;text-decoration:underl
 .drop-btn{background:none;border:0;padding:6px 4px;cursor:pointer;color:var(--nacht);display:grid;place-items:center;transition:transform .15s}
 .mega{position:absolute;left:max(20px,env(safe-area-inset-left,0px));right:max(20px,env(safe-area-inset-right,0px));top:calc(100% - 4px);background:var(--weiss);border:1px solid var(--linie);border-radius:0 0 18px 18px;box-shadow:0 18px 40px rgba(22,36,58,.14);padding:26px 28px 20px;display:none;z-index:30}
 .mega::before{content:"";position:absolute;left:0;right:0;top:-14px;height:14px}
-.nav-drop:hover .mega,.nav-drop:focus-within .mega,.nav-drop.open .mega{display:block}
-.nav-drop:hover .drop-btn,.nav-drop.open .drop-btn{transform:rotate(180deg)}
+.nav-drop.open .mega{display:block}
+.nav-drop.open .drop-btn{transform:rotate(180deg)}
+@media (hover:hover) and (min-width:981px){.nav-drop:hover .mega,.nav-drop:focus-within .mega{display:block}.nav-drop:hover .drop-btn{transform:rotate(180deg)}}
 .mega-in{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:22px}
 .et-head{display:block;font-family:var(--fh);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#B9501F;text-decoration:none;margin-bottom:8px;border:0!important;padding:0!important}
 a.et-head:hover{text-decoration:underline}
@@ -427,8 +428,7 @@ a.et-head:hover{text-decoration:underline}
   .nav-drop > a{flex:1}
   .drop-btn{width:44px;height:44px}
   .mega{position:static;display:none;box-shadow:none;border:0;border-radius:0;padding:4px 0 12px 12px;width:100%}
-  .nav-drop:hover .mega{display:none}
-  .nav-drop.open .mega,.nav-drop:focus-within .mega{display:block}
+  .nav-drop.open .mega{display:block}
   .mega-in{grid-template-columns:minmax(0,1fr);gap:14px}
   .mega .et a:not(.et-head){padding:4px 0}
 }
@@ -456,3 +456,8 @@ a.et-head:hover{text-decoration:underline}
   .nav{max-height:calc(100vh - 79px);max-height:calc(100dvh - 79px);overflow-y:auto;overscroll-behavior:contain}
   .nav a.nav-cta{margin-top:12px;padding:12px 14px;border-bottom:0;text-align:center}
 }
+
+/* Buttons im Seitenkasten dürfen umbrechen */
+.btn-block{white-space:normal;text-align:center;line-height:1.25}
+.cl-side .btn{padding-left:16px;padding-right:16px}
+.prose h3{font-size:21px;margin-top:6px}
