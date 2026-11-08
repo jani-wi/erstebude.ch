@@ -23,8 +23,8 @@ var ROOT = (document.currentScript && document.currentScript.getAttribute('src')
 var NAV = [
   ['wegweiser', 'wegweiser', 'Wegweiser'],
   ['checkliste', 'checkliste', 'Checkliste'],
-  ['ueber', 'ueber-uns', 'Über uns'],
-  ['vorlagen', 'vorlagen', 'Gratis Vorlagen']
+  ['vorlagen', 'vorlagen', 'Gratis Vorlagen'],
+  ['ueber', 'ueber-uns', 'Über uns']
 ];
 
 /* Alle Artikel nach Etappen: für das Wegweiser-Menü und die Übersicht links in den Artikeln */
