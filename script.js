@@ -83,13 +83,11 @@ function shareTitle() {
   return (h ? h.textContent.trim() : document.title.replace(/ \| erstebude\.ch$/, ''));
 }
 function shareHTML() {
-  return '<div class="share"><div><h2>Hilft dir das?</h2><p>Teile die Seite mit Freundinnen und Freunden, die auch ausziehen.</p></div>' +
-    '<div class="share-btns">' +
-      '<button type="button" class="share-b" data-share="native" hidden>Teilen</button>' +
-      '<a class="share-b" data-share="whatsapp" href="#" rel="noopener" target="_blank">WhatsApp</a>' +
-      '<a class="share-b" data-share="email" href="#">E-Mail</a>' +
-      '<button type="button" class="share-b" data-share="copy">Link kopieren</button>' +
-    '</div></div>';
+  return '<div class="share"><span>Seite teilen:</span>' +
+    '<button type="button" class="share-b" data-share="native" hidden>Teilen</button>' +
+    '<a class="share-b" data-share="whatsapp" href="#" rel="noopener" target="_blank">WhatsApp</a>' +
+    '<a class="share-b" data-share="email" href="#">E-Mail</a>' +
+    '<button type="button" class="share-b" data-share="copy">Link kopieren</button></div>';
 }
 
 /* Suche: Index liegt in suche.json und wird erst beim ersten Öffnen geladen */
@@ -128,8 +126,7 @@ function footerHTML() {
   var y = new Date().getFullYear();
   return '' +
     '<footer class="site-footer"><div class="wrap">' +
-      shareHTML() +
-      '<div class="flogo"><img src="' + ROOT + 'img/logo/erstebude_logo_slogan_gestapelt_weiss.svg" alt="erstebude.ch – Der Wegweiser für deinen ersten Auszug" width="220" height="124" loading="lazy"></div>' +
+      '<div class="flogo"><img src="' + ROOT + 'img/logo/erstebude_logo_slogan_gestapelt_weiss.svg" alt="erstebude.ch – Der Wegweiser für deinen ersten Auszug" width="220" height="124" loading="lazy">' + shareHTML() + '</div>' +
       '<div><h2><a href="' + ROOT + 'wegweiser">Wegweiser</a></h2><ul>' +
         '<li><a href="' + ROOT + 'suchen">1 · Suchen</a></li>' +
         '<li><a href="' + ROOT + 'bewerben">2 · Bewerben</a></li>' +
