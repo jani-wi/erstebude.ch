@@ -83,7 +83,7 @@ function shareTitle() {
   return (h ? h.textContent.trim() : document.title.replace(/ \| erstebude\.ch$/, ''));
 }
 function shareHTML() {
-  return '<div class="share"><span>Kennst du jemanden, der auch auszieht? Teile die Seite:</span>' +
+  return '<div class="share"><span>Kennst du jemanden, der auch auszieht?</span>' +
     '<button type="button" class="share-b" data-share="native" hidden aria-label="Teilen" title="Teilen"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg></button>' +
     '<a class="share-b" data-share="whatsapp" href="#" rel="noopener" target="_blank" aria-label="Per WhatsApp teilen" title="WhatsApp"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.5L3 21l2-5.5A8.4 8.4 0 1 1 21 11.5z"/></svg></a>' +
     '<a class="share-b" data-share="email" href="#" aria-label="Per E-Mail teilen" title="E-Mail"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></a>' +
