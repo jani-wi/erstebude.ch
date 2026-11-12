@@ -72,11 +72,12 @@ function headerHTML(page) {
 }
 
 /* Teilen: Link der aktuellen Seite mit UTM-Parametern */
-var SHARE_UTM = 'utm_source=teilen&utm_medium=share&utm_campaign=dima_erstebude_teilen&utm_content=artikel';
-function shareURL() {
+/* utm_content = Weg des Teilens: whatsapp, email, kopie, nativ */
+var SHARE_UTM = 'utm_source=teilen&utm_medium=share&utm_campaign=dima_erstebude_teilen&utm_content=';
+function shareURL(weg) {
   var c = document.querySelector('link[rel="canonical"]');
   var base = (c && c.href) || (location.origin + location.pathname);
-  return base.split('#')[0].split('?')[0] + '?' + SHARE_UTM;
+  return base.split('#')[0].split('?')[0] + '?' + SHARE_UTM + weg;
 }
 function shareTitle() {
   var h = document.querySelector('h1');
@@ -375,18 +376,19 @@ document.addEventListener('DOMContentLoaded', function () {
   /* Teilen im Footer */
   var share = document.querySelector('.share');
   if (share) {
-    var url = shareURL(), title = shareTitle(), text = title + ' – erstebude.ch';
-    share.querySelector('[data-share="whatsapp"]').href = 'https://wa.me/?text=' + encodeURIComponent(text + ' ' + url);
-    share.querySelector('[data-share="email"]').href = 'mailto:?subject=' + encodeURIComponent(text) + '&body=' + encodeURIComponent('Schau mal, das könnte dir beim Auszug helfen:\n' + url);
+    var title = shareTitle(), text = title + ' – erstebude.ch';
+    share.querySelector('[data-share="whatsapp"]').href = 'https://wa.me/?text=' + encodeURIComponent(text + ' ' + shareURL('whatsapp'));
+    share.querySelector('[data-share="email"]').href = 'mailto:?subject=' + encodeURIComponent(text) + '&body=' + encodeURIComponent('Schau mal, das könnte dir beim Auszug helfen:\n' + shareURL('email'));
     var nat = share.querySelector('[data-share="native"]');
     if (navigator.share) nat.hidden = false;
     share.addEventListener('click', function (e) {
       var b = e.target.closest('[data-share]'); if (!b) return;
       var m = b.getAttribute('data-share');
-      EB.track('share', { method: m, content_type: page || 'seite', item_id: location.pathname });
-      if (m === 'native') { e.preventDefault(); navigator.share({ title: text, url: url }).catch(function () {}); }
+      EB.track('share', { method: ({ native: 'nativ', copy: 'kopie' })[m] || m, content_type: page || 'seite', item_id: location.pathname });
+      if (m === 'native') { e.preventDefault(); navigator.share({ title: text, url: shareURL('nativ') }).catch(function () {}); }
       if (m === 'copy') {
         e.preventDefault();
+        var url = shareURL('kopie');
         var done = function () { b.classList.add('ok'); b.title = 'Kopiert'; setTimeout(function () { b.classList.remove('ok'); b.title = 'Link kopieren'; }, 2000); };
         if (navigator.clipboard) navigator.clipboard.writeText(url).then(done, function () { window.prompt('Link kopieren:', url); });
         else window.prompt('Link kopieren:', url);
