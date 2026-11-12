@@ -139,7 +139,7 @@ function footerHTML() {
         '<li><a href="' + ROOT + 'vorlagen">Alle Vorlagen</a></li></ul></div>' +
       '<div><h2><a href="' + (ROOT || './') + '">erstebude.ch</a></h2><ul>' +
         '<li><a href="' + ROOT + 'ueber-uns">Über uns</a></li>' +
-        '<li><a href="mailto:1erstebude@gmail.com" data-track="contact_click" data-where="footer">Kontakt</a></li>' +
+        '<li><a href="' + ROOT + 'ueber-uns#kontakt" data-track="contact_click" data-where="footer">Kontakt</a></li>' +
         '<li><a href="' + ROOT + 'impressum">Impressum</a></li>' +
         '<li><a href="' + ROOT + 'datenschutz">Datenschutz</a></li>' +
         '<li><button class="linklike" type="button" data-consent-open>Cookie-Einstellungen</button></li></ul></div>' +
@@ -360,6 +360,17 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     document.addEventListener('click', function (e) { if (!sPanel.hidden && !e.target.closest('#suche') && !e.target.closest('.search-btn')) openS(false); });
   }
+
+  /* E-Mail-Links: Adresse zusätzlich kopieren, falls kein Mailprogramm eingerichtet ist */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href^="mailto:1erstebude@gmail.com"]'); if (!a) return;
+    var adr = '1erstebude@gmail.com';
+    function toast(t) {
+      var d = document.createElement('div'); d.className = 'toast'; d.setAttribute('role', 'status'); d.textContent = t;
+      document.body.appendChild(d); setTimeout(function () { d.remove(); }, 4500);
+    }
+    if (navigator.clipboard) navigator.clipboard.writeText(adr).then(function () { toast('E-Mail-Adresse kopiert: ' + adr + '. Öffnet sich kein Mailprogramm, füg sie einfach in deinem Mail ein.'); }, function () {});
+  });
 
   /* Teilen im Footer */
   var share = document.querySelector('.share');
