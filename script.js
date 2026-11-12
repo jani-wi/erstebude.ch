@@ -60,15 +60,75 @@ function headerHTML(page) {
     '<header class="site-header"><div class="wrap">' +
       '<a class="logo" href="' + (ROOT || './') + '" aria-label="erstebude.ch – zur Startseite">' +
         '<img src="' + ROOT + 'img/logo/erstebude_logo_gestapelt_farbig.svg" alt="erstebude.ch" width="131" height="58"></a>' +
+      '<button class="search-btn" type="button" aria-controls="suche" aria-expanded="false" aria-label="Suchen" title="Suchen"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><span>Suchen</span></button>' +
       '<button class="menu-btn" type="button" aria-controls="nav" aria-expanded="false" aria-label="Menü öffnen">☰</button>' +
       '<nav class="nav" id="nav" aria-label="Hauptnavigation">' + links + '</nav>' +
+      '<div class="search-panel" id="suche" role="search" hidden><div class="search-in">' +
+        '<label class="sr-only" for="suche-input">Themen, Artikel und Vorlagen durchsuchen</label>' +
+        '<div class="search-row"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input type="search" id="suche-input" placeholder="Wonach suchst du? z.B. Kaution, WG-Casting, Vorlage" autocomplete="off">' +
+        '<button class="search-close" type="button" aria-label="Suche schliessen">✕</button></div>' +
+        '<div class="search-res" aria-live="polite"></div></div></div>' +
     '</div></header>';
 }
+
+/* Teilen: Link der aktuellen Seite mit UTM-Parametern */
+var SHARE_UTM = 'utm_source=teilen&utm_medium=share&utm_campaign=dima_erstebude_teilen&utm_content=artikel';
+function shareURL() {
+  var c = document.querySelector('link[rel="canonical"]');
+  var base = (c && c.href) || (location.origin + location.pathname);
+  return base.split('#')[0].split('?')[0] + '?' + SHARE_UTM;
+}
+function shareTitle() {
+  var h = document.querySelector('h1');
+  return (h ? h.textContent.trim() : document.title.replace(/ \| erstebude\.ch$/, ''));
+}
+function shareHTML() {
+  return '<div class="share"><div><h2>Hilft dir das?</h2><p>Teile die Seite mit Freundinnen und Freunden, die auch ausziehen.</p></div>' +
+    '<div class="share-btns">' +
+      '<button type="button" class="share-b" data-share="native" hidden>Teilen</button>' +
+      '<a class="share-b" data-share="whatsapp" href="#" rel="noopener" target="_blank">WhatsApp</a>' +
+      '<a class="share-b" data-share="email" href="#">E-Mail</a>' +
+      '<button type="button" class="share-b" data-share="copy">Link kopieren</button>' +
+    '</div></div>';
+}
+
+/* Suche: Index liegt in suche.json und wird erst beim ersten Öffnen geladen */
+var SEARCH = (function () {
+  var idx = null, loading = null;
+  function norm(s) { return (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ß/g, 'ss'); }
+  function load() {
+    if (idx) return Promise.resolve(idx);
+    if (!loading) loading = fetch(ROOT + 'suche.json').then(function (r) { return r.json(); }).then(function (d) {
+      idx = d.map(function (e) { e.nt = norm(e.t); e.nw = norm(e.w + (e.k === 'Abschnitt' ? '' : ' ' + e.e)); e.nx = norm(e.x); return e; }); return idx;
+    });
+    return loading;
+  }
+  function find(q) {
+    var words = norm(q).split(/[^a-z0-9]+/).filter(function (w) { return w.length > 1; });
+    if (!words.length || !idx) return [];
+    var res = [];
+    idx.forEach(function (e) {
+      var s = 0;
+      for (var i = 0; i < words.length; i++) {
+        var w = words[i], p = 0;
+        if (e.nt.indexOf(w) > -1) p = 6; else if (e.nw.indexOf(w) > -1) p = 3; else if (e.nx.indexOf(w) > -1) p = 1;
+        if (!p) return;
+        s += p;
+      }
+      if (e.k === 'Artikel') s += 1; if (e.k === 'Vorlage') s += 0.5;
+      res.push([s, e]);
+    });
+    res.sort(function (a, b) { return b[0] - a[0]; });
+    return res.slice(0, 8).map(function (r) { return r[1]; });
+  }
+  return { load: load, find: find };
+})();
 
 function footerHTML() {
   var y = new Date().getFullYear();
   return '' +
     '<footer class="site-footer"><div class="wrap">' +
+      shareHTML() +
       '<div class="flogo"><img src="' + ROOT + 'img/logo/erstebude_logo_slogan_gestapelt_weiss.svg" alt="erstebude.ch – Der Wegweiser für deinen ersten Auszug" width="220" height="124" loading="lazy"></div>' +
       '<div><h2><a href="' + ROOT + 'wegweiser">Wegweiser</a></h2><ul>' +
         '<li><a href="' + ROOT + 'suchen">1 · Suchen</a></li>' +
@@ -254,6 +314,77 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   if (f) f.outerHTML = footerHTML();
   EB.init();
+
+  /* Suche neben der Navigation */
+  var sBtn = document.querySelector('.search-btn'), sPanel = document.getElementById('suche');
+  if (sBtn && sPanel) {
+    var sIn = document.getElementById('suche-input'), sRes = sPanel.querySelector('.search-res'), sTimer;
+    var TIPS = ['Dossier-Vorlage', 'Mietzinsdepot', 'WG-Casting', 'Budget', 'Wochenaufenthalt', 'Checkliste'];
+    function tips() {
+      sRes.innerHTML = '<p class="search-hint">Beliebte Themen:</p><div class="search-tips">' +
+        TIPS.map(function (t) { return '<button type="button" data-tip="' + t + '">' + t + '</button>'; }).join('') + '</div>';
+    }
+    function render() {
+      var q = sIn.value.trim();
+      if (q.length < 2) { tips(); return; }
+      var r = SEARCH.find(q);
+      if (!r.length) {
+        sRes.innerHTML = '<p class="search-hint">Nichts gefunden zu «' + esc(q).replace(/</g, '&lt;') + '». Versuch ein anderes Wort oder schau im <a href="' + ROOT + 'wegweiser">Wegweiser</a>. Fehlt ein Thema? <a href="mailto:1erstebude@gmail.com" data-track="contact_click" data-where="suche">Schreib uns</a>.</p>';
+        return;
+      }
+      sRes.innerHTML = '<ul>' + r.map(function (e) {
+        var dl = e.d ? ' download data-download="' + e.u.split('/').pop() + '"' : '';
+        return '<li><a href="' + ROOT + e.u + '"' + dl + ' data-search-hit="' + e.k + '"><span class="sk">' + e.k + '</span><b>' + esc(e.t) + '</b><small>' + esc(e.e) + '</small></a></li>';
+      }).join('') + '</ul>';
+    }
+    function openS(o) {
+      sPanel.hidden = !o; sBtn.setAttribute('aria-expanded', o ? 'true' : 'false');
+      if (o) { if (nav0) { nav0.classList.remove('open'); } SEARCH.load().then(render); tips(); setTimeout(function () { sIn.focus(); }, 30); }
+    }
+    var nav0 = document.getElementById('nav');
+    sBtn.addEventListener('click', function (e) { e.stopPropagation(); openS(sPanel.hidden); });
+    sPanel.querySelector('.search-close').addEventListener('click', function () { openS(false); sBtn.focus(); });
+    sIn.addEventListener('input', function () {
+      SEARCH.load().then(render); clearTimeout(sTimer);
+      sTimer = setTimeout(function () { var q = sIn.value.trim(); if (q.length > 1) EB.track('search', { search_term: q.slice(0, 60), list: 'seitensuche' }); }, 1200);
+    });
+    sIn.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') { var a = sRes.querySelector('a[data-search-hit]'); if (a) a.click(); }
+    });
+    sRes.addEventListener('click', function (e) {
+      var t = e.target.closest('[data-tip]');
+      if (t) { sIn.value = t.getAttribute('data-tip'); SEARCH.load().then(render); sIn.focus(); return; }
+      var a = e.target.closest('a[data-search-hit]');
+      if (a) EB.track('select_content', { content_type: 'suchergebnis_' + a.getAttribute('data-search-hit').toLowerCase(), item_id: a.getAttribute('href'), search_term: sIn.value.trim().slice(0, 60) });
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !sPanel.hidden) openS(false);
+      if (e.key === '/' && sPanel.hidden && !/input|textarea/i.test(document.activeElement.tagName)) { e.preventDefault(); openS(true); }
+    });
+    document.addEventListener('click', function (e) { if (!sPanel.hidden && !e.target.closest('#suche') && !e.target.closest('.search-btn')) openS(false); });
+  }
+
+  /* Teilen im Footer */
+  var share = document.querySelector('.share');
+  if (share) {
+    var url = shareURL(), title = shareTitle(), text = title + ' – erstebude.ch';
+    share.querySelector('[data-share="whatsapp"]').href = 'https://wa.me/?text=' + encodeURIComponent(text + ' ' + url);
+    share.querySelector('[data-share="email"]').href = 'mailto:?subject=' + encodeURIComponent(text) + '&body=' + encodeURIComponent('Schau mal, das könnte dir beim Auszug helfen:\n' + url);
+    var nat = share.querySelector('[data-share="native"]');
+    if (navigator.share) nat.hidden = false;
+    share.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-share]'); if (!b) return;
+      var m = b.getAttribute('data-share');
+      EB.track('share', { method: m, content_type: page || 'seite', item_id: location.pathname });
+      if (m === 'native') { e.preventDefault(); navigator.share({ title: text, url: url }).catch(function () {}); }
+      if (m === 'copy') {
+        e.preventDefault();
+        var done = function () { b.textContent = 'Kopiert ✓'; setTimeout(function () { b.textContent = 'Link kopieren'; }, 2000); };
+        if (navigator.clipboard) navigator.clipboard.writeText(url).then(done, function () { window.prompt('Link kopieren:', url); });
+        else window.prompt('Link kopieren:', url);
+      }
+    });
+  }
 
   /* Mobile-Menü */
   var btn = document.querySelector('.menu-btn'), nav = document.getElementById('nav');
