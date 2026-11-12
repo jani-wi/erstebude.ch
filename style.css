@@ -494,11 +494,11 @@ a.et-head:hover{text-decoration:underline}
   .search-res .sk{min-width:0}
 }
 
-/* Teilen im Footer: klein unter dem Logo */
-.share{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:18px;font-size:14px;color:#D3DEEA}
-.share span{width:100%;font-weight:600;margin-bottom:2px}
-.share-b{background:none;border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:4px 11px;font:inherit;font-size:13.5px;color:#D3DEEA!important;cursor:pointer;text-decoration:none!important}
-.share-b:hover{border-color:var(--weiss);color:var(--weiss)!important}
+/* Teilen im Footer: kleine Icons unter dem Logo */
+.share{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:18px;max-width:260px}
+.share span{width:100%;font-size:14px;line-height:1.4;color:#D3DEEA;margin-bottom:2px}
+.share-b{width:36px;height:36px;display:inline-grid;place-items:center;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.25);border-radius:50%;color:#D3DEEA!important;cursor:pointer;padding:0;text-decoration:none!important;transition:background .15s,color .15s}
+.share-b:hover,.share-b.ok{background:var(--weiss);color:var(--nacht)!important;border-color:var(--weiss)}
 @media print{.search-btn,.search-panel,.share{display:none!important}}
 .search-row input::-webkit-search-cancel-button{-webkit-appearance:none;display:none}
 @media (min-width:981px){.nav{margin-left:18px}.search-btn{height:38px;padding:0 11px}}
